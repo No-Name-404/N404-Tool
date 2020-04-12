@@ -91,10 +91,10 @@ class Tools_shell(Cmd):
 
     def do_show(self,arg):
         tools_name = self.tools_name
-        print (Color.reader(f'B#There are R#{len(tools_name)}B# toolsY#.P#.G#.\n'))
         for name in tools_name:
-            print(Color.reader(f'W#. . . Y#{name}'))
+            print(Color.reader(f'B#> W#{name}'))
             time.sleep(0.01)
+        print (Color.reader(f'B#There are R#{len(tools_name)}B# toolsY#.P#.G#.\n'))
 
     def do_download(self,arg):
         tools_to_download = arg.split(' ')

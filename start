@@ -1,0 +1,109 @@
+#!/usr/bin/python
+from cmd import Cmd
+from My_Style import Color,Style,Animation,is_exist
+import os ,sys ,subprocess
+
+from tools import (
+        Tools_shell,
+        Style_shell,
+        )
+
+# The tool style...
+SQUARE = lambda *args:Style(*args).Square(Square=['G#[Y#+G#]',' G#| ','G#[Y#+G#]','-','G#[Y#+G#]',' G#|','G#[Y#+G#]','-'])
+
+HELP ='''
+             Y#N404-Tool R#vB#{C#1.0B#}
+
+ sections:
+-------------------------------------------
+  Tools     There are more than 200 tools.
+  Style     Create your own style.
+  Hash      New and complex encryption.
+  Fishing   Hack through fake pages.
+  Telebot   Create your own telegram bot.
+-------------------------------------------
+
+ system:
+-------------------------------------------
+  clear      Clear the screen.
+  exit       Stop the Tool.
+  update     To update N404-Tool.
+  about      About the developer.
+-------------------------------------------
+'''
+ABOUT = '''
+ about:
+-------------------------------------------
+  name      Mohamed Al-kainai.
+  age       5-11-2002.
+  country   Yemen.
+  telegram  @N404_No_Name_404_N4
+  support   C#https://paypal.me/Mohamedkainai
+  youtube   C#https://bit.ly/3b3uPwV
+-------------------------------------------
+'''
+Color.Theme('light')
+
+def intro_text(type=True):
+    S = 'G#[Y#+G#]'
+    if type:
+        return SQUARE(HELP)
+    else:
+        Animation.SlowLine(SQUARE(HELP),t=0.03)
+
+class shell(Cmd):
+    prompt = Color.reader(f'G#┌───B#[ C#{os.uname().sysname}B# ]G##B#[ Y#{os.uname().nodename} B#]G##B#[ R#No Name B#]G#>>>\nG#|\nG#└─>>>$ W#')
+    intro = intro_text()
+
+    def default(self, line):
+        sys.stdout.write('bash: %s: command not found\n'%line)
+
+    def do_help(self,arg):
+        if arg:
+            super().do_help(arg)
+        else:
+            intro_text(type=False)
+
+    def do_clear(self,arg):
+        os.system('clear')
+
+    def do_exit(self,arg):
+        exit()
+
+    def do_update(self,arg):
+        if is_exist('sudo'):
+            DEL = 'sudo rm -rif'
+        else:
+            DEL = 'rm -rif'
+        # SHELL = subprocess.run('')
+        # import subprocess as s
+        #
+        # ss = s.run('git clone https://github.com/No-Name-404/fdf',shell=True,capture_output=True,text=True)
+        #
+        # print (ss.stderr)
+        # print (ss.stdout)
+        # print (ss.returncode)
+        print(os.getcwd())
+
+    def do_about(self,arg):
+        Animation.SlowLine(SQUARE(ABOUT),t=0.02)
+
+    def do_Tools(self,arg):
+        Tools_shell.shell_main = super(shell,self).cmdloop
+        Tools_shell().cmdloop(Tools_shell().help())
+
+    def do_Style(self,arg):
+        Style_shell.shell_main = super(shell,self).cmdloop
+        Style_shell().cmdloop(Style_shell().help())
+
+    def do_Hash(self,arg):
+        print ('It will be available soon...')
+
+    def do_Fishing(self,arg):
+        print ('It will be available soon...')
+
+    def do_Telebot(self,arg):
+        print ('It will be available soon...')
+
+if __name__=='__main__':
+    shell().cmdloop()

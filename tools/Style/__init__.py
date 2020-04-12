@@ -156,6 +156,9 @@ class Style_shell(Cmd):
     path = os.environ['HOME']
     file = 'name.py'
 
+    # save the design...
+    save = None
+
     def help(self):
         return intro_text()
 
@@ -214,8 +217,12 @@ class Style_shell(Cmd):
                 print (Color.reader(f'Y#{arg[0]} C#: W#{set_tools}'))
             elif arg[0] == 'title':
                 self.title = set
-            elif arg[0] == 'file':
+            if arg[0] == 'file' and not os.path.isfile(os.path.join(self.path,set.strip())) :
                 self.file = set
+            elif arg[0] == 'file' and os.path.isfile(os.path.join(self.path,set.strip())) :
+                NoError = False
+                print(f'FileNameError: {set}:The name already exist')
+
             try:
                 if arg[0] == 'padding_x':
                     self.padding_x = int(set)
@@ -232,9 +239,9 @@ class Style_shell(Cmd):
                 pass
             else :
                 NoError = False
-                print(f'path: {PATH}: not exist')
+                print(f'PathError: {PATH}: not exist')
 
-            print (Color.reader(f'Y#{arg[0]} C#: G#{set}\n') if NoError else '',end='')
+            print (Color.reader(f'Y#{arg[0]} C#: W#{set}\n') if NoError else '',end='')
 
         except IndexError as Error:
             print ('Error:',Error)
@@ -249,10 +256,20 @@ class Style_shell(Cmd):
                 for f in LIST
                 if f.startswith(text)
             ]
+
     def do_show(self,arg):
         my_style = MakeStyle(self.Intro,self.title,
         self.tools,self.padding_x,self.padding_y)
-        print(my_style.StyleText())
+        my_style = my_style.StyleText()
+        self.save = my_style
+        print(my_style)
+
+    def do_save(self,arg):
+        style = self.save
+        path_file = os.path.join(self.path,self.file)
+        with open(path_file,'w') as f:
+            f.write(f'def style():\n\treturn {bytes(style,"utf-8")}.decode(\'utf-8\')\n# To show [ print (style()) ]')
+            print (Color.reader(f'G#Done: B#{path_file}'))
 
 if __name__ == '__main__':
     Style_shell().cmdloop()
