@@ -1,2 +1,2 @@
-from .Tools import Tools_shell
-from .Style import Style_shell
+from .Tools.Tools import Tools_shell
+from .Style.Style import Style_shell

@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3 -B
 from cmd import Cmd
 from My_Style import Color,Style,Animation,is_exist
 import os ,sys ,subprocess
@@ -9,12 +9,13 @@ from tools import (
         )
 
 # Database...
-from tools.DATA import (
+from tools.root import (
 HELP_MAIN as HELP, # text...
 ABOUT_MAIN as ABOUT, # text...
 PROMPT,
 SHELL_ALL,
-)
+TOOLS_PATH,
+XPATH )
 
 # The Theme of the tool
 Color.Theme('light')
@@ -32,12 +33,11 @@ class shell(SHELL_ALL):
         else:
             DEL = 'rm -rif '
 
-        PATH = os.getcwd() # Tool path
-        subprocess.run(DEL+PATH) # delete old version
+        subprocess.run(DEL+XPATH+'N404-Tool',shell=True) # delete old version
 
         # download new version...
-        os.chdir(PATH.replace('N404-Tool',''))
-        subprocess.run('git clone https://github.com/No-Name-404/N404-Tool')
+        os.chdir(XPATH)
+        subprocess.run('git clone https://github.com/No-Name-404/N404-Tool',shell=True)
         exit(Color.reader('G#Done: W#run the tool agin...\n'))
 
     def do_about(self,arg):

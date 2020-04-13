@@ -4,15 +4,16 @@ from My_Style import (
 import os ,sys ,json ,time
 Color.Theme('light')
 
-from tools.DATA import (
+from tools.root import (
 HELP_TOOLS as HELP,
 OPTIONS_TOOLS as OPTIONS,
 PROMPT,
 SHELL_ALL,
-)
+TOOLS_PATH,
+XPATH )
 
 # all tools clone...
-with open(SHELL_ALL.tool_path+'/tools/Tools/clone.json') as file:
+with open(TOOLS_PATH+'Tools/clone.json') as file:
     CLONES = json.load(file)
 
 class Tools_shell(SHELL_ALL):
@@ -57,16 +58,18 @@ class Tools_shell(SHELL_ALL):
 
     def do_download(self,arg):
         tools_to_download = arg.split(' ')
-        my_path = os.getcwd()
         for i in tools_to_download:
             if is_exist('sudo'):
                 git = 'sudo git clone '
             else:
                 git = 'git clone '
             os.chdir(self.path)
-            os.system(git+CLONES[i])
-            print('\n')
-        os.chdir(my_path)
+            try:
+                os.system(git+CLONES[i])
+                print('\n')
+            except KeyError:
+                print (Color.reader(f'R#Error: W#{i}R#:not found!'))
+        os.chdir(XPATH+'N404-Tool')
 
     def complete_download(self, text, line, begidx, endidx):
         if not text:

@@ -5,7 +5,7 @@ from My_Style import (
 from My_Style.Library import ProFunctions
 import os ,sys ,json ,time ,random
 
-from tools.DATA import (
+from tools.root import (
 HELP_STYLE as HELP,
 OPTIONS_STYLE as OPTIONS,
 PROMPT,
@@ -161,7 +161,7 @@ class Style_shell(SHELL_ALL):
 
         try:
             if arg[0] == 'intro':
-                self.Intro = set
+                self.Intro = None if 'None' in set else set
             elif arg[0] == 'tools':
                 NoError = False
                 self.tools = set.strip().split(' ')
@@ -170,7 +170,7 @@ class Style_shell(SHELL_ALL):
             elif arg[0] == 'title':
                 self.title = set
             if arg[0] == 'file' and not os.path.isfile(os.path.join(self.path,set.strip())) :
-                self.file = set
+                self.file = set.strip()
             elif arg[0] == 'file' and os.path.isfile(os.path.join(self.path,set.strip())) :
                 NoError = False
                 print(f'FileNameError: {set}:The name already exist')

@@ -34,7 +34,7 @@ class SHELL_ALL(Cmd):
         os.system('clear')
 
     def do_exit(self,arg):
-        exit()
+        exit('\033[0;37m')
 
     def do_help(self,arg):
         if arg: # check if run as intro
