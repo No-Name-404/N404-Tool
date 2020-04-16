@@ -9,8 +9,7 @@ from tools.root import (
 HELP_STYLE as HELP,
 OPTIONS_STYLE as OPTIONS,
 PROMPT,
-SHELL_ALL,
-)
+SHELL_ALL )
 
 Color.Theme('light')
 
@@ -27,7 +26,7 @@ R,G,Y,B,P,C,W,Bl = [
         _set_c('Bl#'),
 ]
 
-class MakeStyle:
+class MakeStyle(ProFunctions):
     def __init__(self,intro,title,tools,padding_x,padding_y):
         self.intro = intro
         self.title = title
@@ -75,7 +74,7 @@ class MakeStyle:
         title = _set_c(self.title)+'\n'
         tools = [f'{_c[0]}{name} {_c[2]}[{_c[1]}{num+1}{_c[2]}]'
                 for num ,name in enumerate(self.tools)]
-        tools = ProFunctions().Equal(*tools)
+        tools = self.Equal(*tools)
         tools = title+self.my_tool(tools)
 
         text = Style(tools).Center()

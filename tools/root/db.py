@@ -2,7 +2,7 @@ RULER = '-'*43
 
 # main shell texts...
 HELP_MAIN ='''
-            Y#N404-Tool R#vB#{C#0.0.4B#}
+            Y#N404-Tool R#vB#{C#0.0.5B#}
 
  sections:
 ***RULER***
@@ -89,5 +89,22 @@ OPTIONS_STYLE = '''
   padding_y : {padding_y}
   path : {path}
   file : {file}
+***RULER***
+'''.replace('***RULER***', RULER)
+
+# Hash shell texts...
+HELP_HASH = '''
+ sections:
+***RULER***
+  options    Display the options menu.
+  start      to start hashing.
+***RULER***
+'''.replace('***RULER***', RULER)
+
+OPTIONS_HASH = '''
+ options:
+***RULER***
+  type : {type}
+  path : {file_or_folder}
 ***RULER***
 '''.replace('***RULER***', RULER)

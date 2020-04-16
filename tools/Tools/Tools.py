@@ -13,7 +13,7 @@ TOOLS_PATH,
 XPATH )
 
 # all tools clone...
-with open(TOOLS_PATH+'Tools/clone.json') as file:
+with open(TOOLS_PATH+'Tools/.clone.json') as file:
     CLONES = json.load(file)
 
 class Tools_shell(SHELL_ALL):
@@ -68,7 +68,7 @@ class Tools_shell(SHELL_ALL):
                 os.system(git+CLONES[i])
                 print('\n')
             except KeyError:
-                print (Color.reader(f'R#Error: W#{i}R#:not found!'))
+                print (Color.reader(f'R#Error: W#{i}R#:not found!\033[0;37m'))
         os.chdir(XPATH+'N404-Tool')
 
     def complete_download(self, text, line, begidx, endidx):

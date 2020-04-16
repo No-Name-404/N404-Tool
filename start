@@ -4,11 +4,10 @@ from My_Style import Color,Style,Animation,is_exist
 import os ,sys ,subprocess
 
 from tools import (
-        Tools_shell,
-        Style_shell,
+        Tools_shell,Style_shell,
+        Hash_shell,
         )
 
-# Database...
 from tools.root import (
 HELP_MAIN as HELP, # text...
 ABOUT_MAIN as ABOUT, # text...
@@ -42,7 +41,7 @@ class shell(SHELL_ALL):
 
     def do_about(self,arg):
         # display the About text...
-        Animation.SlowLine(SQUARE(ABOUT),t=0.02)
+        self.SQUARE(self.SQUARE(ABOUT),type=False)
 
     def do_Tools(self,arg):
         # start the Tools section...
@@ -55,7 +54,9 @@ class shell(SHELL_ALL):
         Style_shell().cmdloop(Style_shell().help())
 
     def do_Hash(self,arg):
-        print ('It will be available soon...')
+        # start the Hash section...
+        Hash_shell.shell_main = super(shell,self).cmdloop
+        Hash_shell().cmdloop(Hash_shell().help())
 
     def do_Fishing(self,arg):
         print ('It will be available soon...')
@@ -64,4 +65,23 @@ class shell(SHELL_ALL):
         print ('It will be available soon...')
 
 if __name__=='__main__': # Check if run as main
-    shell().cmdloop() # start the N404-Tool
+    if len(sys.argv) > 1:
+        if sys.argv[1] == '--Hash':
+            shell().do_Hash(None)
+        elif sys.argv[1] == '--Style':
+            shell().do_Style(None)
+        elif sys.argv[1] == '--Tools':
+            shell().do_Tools(None)
+        # elif sys.argv[1] == '--malker': #XXX soon...
+        #     os.system(f'cp {TOOLS_PATH+"Hash/setup"} {os.getcwd()}')
+        else:
+            print ('''
+N404-Tool:
+ --Tools     To open Tools section
+ --Style     To open Style section
+ --Hash      To open Hash section
+ --Fishing   To open Fishing section
+ --Telebot   To open Telebot section
+''')
+    else:
+        shell().cmdloop() # start the N404-Tool
