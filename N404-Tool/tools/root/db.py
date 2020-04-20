@@ -2,7 +2,7 @@ RULER = '-'*43
 
 # main shell texts...
 HELP_MAIN ='''
-            Y#N404-Tool R#vB#{C#0.0.5B#}
+          Y#N404-Tool R#vB#{C#0.6B#}
 
  sections:
 ***RULER***
@@ -98,6 +98,7 @@ HELP_HASH = '''
 ***RULER***
   options    Display the options menu.
   start      to start hashing.
+  main       main page.
 ***RULER***
 '''.replace('***RULER***', RULER)
 
@@ -106,5 +107,22 @@ OPTIONS_HASH = '''
 ***RULER***
   type : {type}
   path : {file_or_folder}
+***RULER***
+'''.replace('***RULER***', RULER)
+
+# Fishing shell texts...
+HELP_FISHING = '''
+ sections:
+***RULER***
+  options    Display the options menu.
+  start      To start the Server.
+  main       Main page.
+***RULER***
+'''.replace('***RULER***', RULER)
+OPTIONS_FISHING = '''
+ options:
+***RULER***
+  server : {server}
+  page : {page}
 ***RULER***
 '''.replace('***RULER***', RULER)

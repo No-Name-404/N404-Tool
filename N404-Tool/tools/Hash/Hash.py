@@ -25,6 +25,7 @@ class hashing:
             self.pyc()
         elif type == 'malker':
             print ('soon...')
+        print ('Done...')
 
     def check_type(self):
         o = os.path
@@ -47,10 +48,8 @@ class hashing:
 
     def msg(self,name):
         name = name.split('/')[-1]
-        print (Color.reader(f'Y#start hashingW#...R#[B#{name}R#]'),end='')
-        time.sleep(0.5)
-        print (Color.reader(f'\rG#Done...R#[B#{name}R#]'+(' '*10)))
-
+        print (Color.reader(f'Y#start hashingW#...R#[B# {name} R#]'))
+        time.sleep(0.6)
     def md5(self):
         def encode(path):
             self.msg(path)

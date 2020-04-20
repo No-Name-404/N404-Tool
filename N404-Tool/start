@@ -5,7 +5,7 @@ import os ,sys ,subprocess
 
 from tools import (
         Tools_shell,Style_shell,
-        Hash_shell,
+        Hash_shell,Fishing_shell,
         )
 
 from tools.root import (
@@ -27,16 +27,12 @@ class shell(SHELL_ALL):
         return self.SQUARE(HELP)
 
     def do_update(self,arg):
-        if is_exist('sudo'): # check if root exist
-            DEL = 'sudo rm -rif '
-        else:
-            DEL = 'rm -rif '
-
-        subprocess.run(DEL+XPATH+'N404-Tool',shell=True) # delete old version
-
         # download new version...
-        os.chdir(XPATH)
-        subprocess.run('git clone https://github.com/No-Name-404/N404-Tool',shell=True)
+        print('please wait...')
+        subprocess.run('git clone https://github.com/No-Name-404/N404-Tool',shell=True,cahture_output=True)
+        print(Color.reader('\033[0;37m[ G#OK\033[0;37m ] N404-Tool has been downloaded...'))
+        subprocess.run('python3 -B N404-Tool/setup.py',shell=True)
+        print(Color.reader('\033[0;37m[ G#OK\033[0;37m ] N404-Tool has been setup...'))
         exit(Color.reader('G#Done: W#run the tool agin...\n'))
 
     def do_about(self,arg):
@@ -59,8 +55,11 @@ class shell(SHELL_ALL):
         Hash_shell().cmdloop(Hash_shell().help())
 
     def do_Fishing(self,arg):
+        # start the Fishing section...
+        # Fishing_shell.shell_main = super(shell,self).cmdloop
+        # Fishing_shell().cmdloop(Fishing_shell().help())
         print ('It will be available soon...')
-
+        
     def do_Telebot(self,arg):
         print ('It will be available soon...')
 
@@ -72,6 +71,10 @@ if __name__=='__main__': # Check if run as main
             shell().do_Style(None)
         elif sys.argv[1] == '--Tools':
             shell().do_Tools(None)
+        elif sys.argv[1] == '--Fishing':
+            shell().do_Fishing(None)
+        elif sys.argv[1] == '--Telebot':
+            shell().do_Telebot(None)
         # elif sys.argv[1] == '--malker': #XXX soon...
         #     os.system(f'cp {TOOLS_PATH+"Hash/setup"} {os.getcwd()}')
         else:

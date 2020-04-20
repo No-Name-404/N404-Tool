@@ -1,0 +1,13 @@
+#!/usr/bin/python3 -B
+import os, sys
+from My_Style import is_exist
+
+if is_exist('sudo'):
+    root = 'sudo '
+else:
+    root = ''
+path = os.environ['_'].replace('bin/python3','lib/N404-Tool/start')
+if len(sys.argv) > 1:
+   os.system(f'{root}python3 -B {path} '+sys.argv[1])
+else:
+   os.system(f'{root}python3 -B {path}')
