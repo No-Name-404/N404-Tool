@@ -2,7 +2,7 @@ RULER = '-'*43
 
 # main shell texts...
 HELP_MAIN ='''
-          Y#N404-Tool R#vB#{C#0.6B#}
+             Y#N404-Tool R#vB#{C#0.6B#}
 
  sections:
 ***RULER***

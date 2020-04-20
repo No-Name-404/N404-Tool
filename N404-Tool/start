@@ -28,12 +28,11 @@ class shell(SHELL_ALL):
 
     def do_update(self,arg):
         # download new version...
-        print('please wait...')
-        subprocess.run('git clone https://github.com/No-Name-404/N404-Tool',shell=True,cahture_output=True)
-        print(Color.reader('\033[0;37m[ G#OK\033[0;37m ] N404-Tool has been downloaded...'))
+        subprocess.run('git clone https://github.com/No-Name-404/N404-Tool',shell=True)
         subprocess.run('python3 -B N404-Tool/setup.py',shell=True)
+        print(Color.reader('\033[0;37m[ G#OK\033[0;37m ] N404-Tool has been downloaded...'))
         print(Color.reader('\033[0;37m[ G#OK\033[0;37m ] N404-Tool has been setup...'))
-        exit(Color.reader('G#Done: W#run the tool agin...\n'))
+        exit(Color.reader('G#Done: W#run the tool agin...'))
 
     def do_about(self,arg):
         # display the About text...
@@ -59,7 +58,7 @@ class shell(SHELL_ALL):
         # Fishing_shell.shell_main = super(shell,self).cmdloop
         # Fishing_shell().cmdloop(Fishing_shell().help())
         print ('It will be available soon...')
-        
+
     def do_Telebot(self,arg):
         print ('It will be available soon...')
 

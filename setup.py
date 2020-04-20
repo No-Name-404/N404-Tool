@@ -1,5 +1,8 @@
 #!/usr/bin/python3 -B
 import os,sys,subprocess
+from distutils.spawn import find_executable
+is_exist = lambda text:True if find_executable(
+                            str(text)) else False
 
 if 'com.termux' in os.getcwd():
     DEL = 'rm -rif '
@@ -20,11 +23,10 @@ class setup:
     test = {
     }
     tools = {
-        'figlet':root+install+' figleta',
+        'figlet':root+install+' figlet',
         'toilet':root+install+' toilet',
         'pip3':root+install+' python3-pip',
         'python3':python,
-        'nmap':root+install+' nmap',
     }
 
     libs = {
@@ -32,13 +34,14 @@ class setup:
         'flask_ngrok':root+'pip3 install flask_ngrok',
         'My_Style':root+'pip3 install My_Style',
         'requests':root+'pip3 install requests',
-        'pyTelegramBotAPI':root+'pip3 install pyTelegramBotAPI',
+        'telebot':root+'pip3 install pyTelegramBotAPI',
     }
     def run(self):
         print ('please wait...')
         self.shell()
         self.module()
-        self.setup()
+        print (os.getcwd())
+    #    self.setup()
 
     def setup(self):
         subprocess.run(DEL+os.environ['SHELL'].replace('bash', 'N404-Tool'),shell=True,capture_output=True)
@@ -46,12 +49,15 @@ class setup:
         subprocess.run(chmod+os.environ['SHELL'].replace('bash', 'N404-Tool'),shell=True,capture_output=True)
         subprocess.run(DEL+os.environ['SHELL'].replace('bin/bash', 'lib/N404-Tool'),shell=True,capture_output=True)
         subprocess.run(MV+'N404-Tool '+os.environ['SHELL'].replace('bin/bash', 'lib/'),shell=True,capture_output=True)
-        subprocess.run(DEL+os.getcwd(),shell=True,capture_output=True)
+        subprocess.run(DEL+(os.getcwd() if os.getcwd().endswith('-Tool') else os.getcwd()+'/N404-Tool' ),shell=True,capture_output=True)
 
     def shell(self):
         for name,shell in self.tools.items():
-            check = subprocess.run(shell+' -y',shell=True,capture_output=True)
-            if check.stderr.decode('utf-8') == '':
+            subprocess.run(shell+' -y',shell=True)
+
+        print ('\nChecking...')
+        for name in self.tools:
+            if is_exist(name):
                 print (f'\033[0;37m[ \033[1;32mOK\033[0;37m ] {name} has been installed...')
                 self.test[name] = True
             else:
