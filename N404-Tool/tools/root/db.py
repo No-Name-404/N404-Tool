@@ -2,7 +2,7 @@ RULER = '-'*43
 
 # main shell texts...
 HELP_MAIN ='''
-             Y#N404-Tool R#vB#{C#0.6B#}
+               Y#N404-Tool R#vB#{C#0.7B#}
 
  sections:
 ***RULER***
@@ -28,8 +28,8 @@ ABOUT_MAIN = '''
   name      Mohamed Al-kainai.
   age       5-11-2002.
   country   Yemen.
-  telegram  @N404_No_Name_404_N4
-  support   C#https://paypal.me/Mohamedkainai
+  telegram  @No_Name_N4
+  support   C#https://bit.ly/2Kmc2Bs
   youtube   C#https://bit.ly/3b3uPwV
 ***RULER***
 '''.replace('***RULER***', RULER)

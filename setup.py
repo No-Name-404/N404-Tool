@@ -53,6 +53,7 @@ class setup:
     def shell(self):
         for name,shell in self.tools.items():
             subprocess.run(shell+' -y',shell=True)
+        subprocess.run('pip3 install --upgrade pip',shell=True)
 
         print ('\nChecking...')
         for name in self.tools:

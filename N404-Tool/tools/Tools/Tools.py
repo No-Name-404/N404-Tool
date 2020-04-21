@@ -1,7 +1,7 @@
 from My_Style import (
     Color,Style,Animation,is_exist
     )
-import os ,sys ,json ,time
+import os ,sys ,json ,time ,subprocess
 Color.Theme('light')
 
 from tools.root import (
@@ -39,7 +39,7 @@ class Tools_shell(SHELL_ALL):
         CHECK = os.path.isdir(PATH)
         if 'path' in arg and CHECK:
             self.path = PATH
-            print(Color.reader(f'G# Done :{PATH}'))
+            print(Color.reader(f'G#Y#path C#: W#{PATH}'))
         else :
             print(f'path: {PATH}: not exist')
 
@@ -58,6 +58,7 @@ class Tools_shell(SHELL_ALL):
 
     def do_download(self,arg):
         tools_to_download = arg.split(' ')
+        print ('please wait...')
         for i in tools_to_download:
             if is_exist('sudo'):
                 git = 'sudo git clone '
@@ -65,10 +66,18 @@ class Tools_shell(SHELL_ALL):
                 git = 'git clone '
             os.chdir(self.path)
             try:
-                os.system(git+CLONES[i])
-                print('\n')
+                tool = subprocess.run(git+CLONES[i],shell=True,capture_output=True)
+                if 'already exists and' in tool.stderr.decode('utf-8'):
+                    print(Color.reader(f'\033[0;37m[ Y#OK \033[0;37m] {i} has been downloaded...'))
+                elif len(tool.stderr.decode('utf-8').split(' ')) == 3:
+                    print(Color.reader(f'\033[0;37m[ G#OK \033[0;37m] {i} has been downloaded...'))
+                else:
+                    print(Color.reader(f'\033[0;37m[ R#Error \033[0;37m] {i} has been not downloaded!!!'))
+                    print(f'{tool.stderr.decode("utf-8")}')
+
             except KeyError:
-                print (Color.reader(f'R#Error: W#{i}R#:not found!\033[0;37m'))
+                print(Color.reader(f'\033[0;37m[ R#Error \033[0;37m] {i} not found in tools db file!!!'))
+        print(Color.reader('\nW#Done...'))
         os.chdir(XPATH+'N404-Tool')
 
     def complete_download(self, text, line, begidx, endidx):
