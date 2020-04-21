@@ -40,8 +40,7 @@ class setup:
         print ('please wait...')
         self.shell()
         self.module()
-        print (os.getcwd())
-    #    self.setup()
+        self.setup()
 
     def setup(self):
         subprocess.run(DEL+os.environ['SHELL'].replace('bash', 'N404-Tool'),shell=True,capture_output=True)
