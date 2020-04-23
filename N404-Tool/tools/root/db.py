@@ -2,7 +2,7 @@ RULER = '-'*43
 
 # main shell texts...
 HELP_MAIN ='''
-               Y#N404-Tool R#vB#{C#0.7B#}
+              Y#N404-Tool R#vB#{C#0.8B#}
 
  sections:
 ***RULER***
@@ -124,5 +124,22 @@ OPTIONS_FISHING = '''
 ***RULER***
   server : {server}
   page : {page}
+***RULER***
+'''.replace('***RULER***', RULER)
+
+# Telebot shell texts...
+HELP_TELEBOT = '''
+ sections:
+***RULER***
+  options    Display the options menu.
+  start      To start the bot server.
+  main       Main page.
+***RULER***
+'''.replace('***RULER***', RULER)
+OPTIONS_TELEBOT = '''
+ options:
+***RULER***
+  token : {token}
+  database : {database}
 ***RULER***
 '''.replace('***RULER***', RULER)

@@ -6,6 +6,7 @@ import os ,sys ,subprocess
 from tools import (
         Tools_shell,Style_shell,
         Hash_shell,Fishing_shell,
+        Telebot_shell,
         )
 
 from tools.root import (
@@ -61,7 +62,10 @@ class shell(SHELL_ALL):
         print ('It will be available soon...')
 
     def do_Telebot(self,arg):
-        print ('It will be available soon...')
+        # start the Telebot section...
+        Telebot_shell.shell_main = super(shell,self).cmdloop
+        Telebot_shell().cmdloop(Telebot_shell().help())
+        # print ('It will be available soon...')
 
 if __name__=='__main__': # Check if run as main
     if len(sys.argv) > 1:
