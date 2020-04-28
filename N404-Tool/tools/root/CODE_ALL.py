@@ -50,3 +50,64 @@ class SHELL_ALL(Cmd):
             self.shell_main()
         except TypeError:
             print ('This is the Main page...')
+
+class EasyCmd:
+    def __init__(self):
+        if 'com.termux' in os.getcwd():
+            self.bash_file = os.environ['PREFIX']+'/etc/bash.bashrc'
+            self.shell = 'pkg '
+            self.text = '''
+# From N404-Tool...
+alias i='pkg install'
+alias c='clear'
+alias p3='python3'
+alias p2='python2'
+alias p='python'
+alias b='bash'
+alias r='rm -rif'
+alias u='pkg update && pkg upgrade'
+alias x='exit'
+alias h='cd ~'
+# end...
+'''
+        else :
+            self.bash_file = '/etc/bash.bashrc'
+            self.shell = 'apt-get '
+            self.text = '''
+# From N404-Tool...
+alias i='sudo apt-get install'
+alias c='clear'
+alias p3='sudo python3'
+alias p2='sudo python2'
+alias b='sudo bash'
+alias r='sudo rm -rif'
+alias u='sudo apt-get update && sudo apt-get upgrade'
+alias x='exit'
+alias d='cd ~/Desktop/'
+# end...
+'''
+    def write(self):
+        with open(self.bash_file,'r') as f:
+            file = f.read()
+        if os.path.isfile(self.bash_file):
+            if self.text not in file:
+                with open(self.bash_file,'a') as f:
+                    f.write(self.text)
+        else:
+            print (Color.reader('Error...\nThe bash.bashrc file not found'))
+
+    def end(self):
+        info = self.text.split("alias ")
+        temp = {}
+        for i in info:
+            try:
+                temp[i.split('=')[0]]=i.split('=')[1].replace("'","")
+            except IndexError:
+                pass
+        print (Color.reader('G#Done...\nThis is the list of abbreviations :\n'))
+        for x,y in temp.items():
+            y = y.replace('\n# end...','\033[0;37m')
+            if len(x) == 2:
+                print (Color.reader(f'G#{x} C#: Y#{y}'),end='')
+            elif len(x) == 1:
+                print (Color.reader(f'G#{x}  C#: Y#{y}'),end='')

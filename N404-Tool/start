@@ -14,6 +14,7 @@ HELP_MAIN as HELP, # text...
 ABOUT_MAIN as ABOUT, # text...
 PROMPT,
 SHELL_ALL,
+EasyCmd,
 TOOLS_PATH,
 XPATH )
 
@@ -79,16 +80,31 @@ if __name__=='__main__': # Check if run as main
             shell().do_Fishing(None)
         elif sys.argv[1] == '--Telebot':
             shell().do_Telebot(None)
-        # elif sys.argv[1] == '--malker': #XXX soon...
-        #     os.system(f'cp {TOOLS_PATH+"Hash/setup"} {os.getcwd()}')
+        elif sys.argv[1] == '--EasyCmd':
+            EasyCmd = EasyCmd()
+            EasyCmd.write()
+            EasyCmd.end()
+        elif sys.argv[1] == '--New':
+            print ('''
+N404-Tool:
+
+    EasyCmd has been added..
+    to use :
+    N404-Tool --EasyCmd
+''')
+
         else:
             print ('''
 N404-Tool:
- --Tools     To open Tools section
- --Style     To open Style section
- --Hash      To open Hash section
- --Fishing   To open Fishing section
- --Telebot   To open Telebot section
+
+ --Tools     To open Tools section.
+ --Style     To open Style section.
+ --Hash      To open Hash section.
+ --Fishing   To open Fishing section.
+ --Telebot   To open Telebot section.
+
+ --EasyCmd   Shortcuts to commands.
+ --New       What is the New ?
 ''')
     else:
         shell().cmdloop() # start the N404-Tool

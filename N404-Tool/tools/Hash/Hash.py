@@ -50,6 +50,7 @@ class hashing:
         name = name.split('/')[-1]
         print (Color.reader(f'Y#start hashingW#...R#[B# {name} R#]'))
         time.sleep(0.6)
+        
     def md5(self):
         def encode(path):
             self.msg(path)

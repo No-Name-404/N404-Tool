@@ -22,8 +22,6 @@ class Telebot_shell(SHELL_ALL):
         if self.read():
             self.token = self.read()['token']
             self.database = self.read()['file']
-# '972474793:AAGiYULCJX8K8chqnWhy4KVeGNktj_Mqu40'
-# 'db.txt'
 
     def help(self):
         return  self.SQUARE(HELP)
@@ -63,7 +61,7 @@ class Telebot_shell(SHELL_ALL):
             return False
 
     def do_start(self,arg):
-        if self.token and self.database:
+        if self.token and self.database and os.path.isfile(self.database):
             bot = telebot.TeleBot(token=self.token)
             @bot.message_handler(func=lambda m: True)
             def Read_messages(msg):
