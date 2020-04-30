@@ -218,11 +218,11 @@ class Style_shell(SHELL_ALL):
     def do_save(self,arg):
         style = self.save
         path_file = os.path.join(self.path,self.file)
-        with open(path_file,'w') as f:
+        with open(path_file,'a') as f:
             f.write(f'# from My_Style import Animation as An\ndef style():\n\treturn {bytes(style,"utf-8")}.decode(\'utf-8\')\n# To show...\n# print (style())\n# An.SlowLine(style(),t=0.02)')
             print (Color.reader(f'G#Done: B#{path_file}'))
 
-if __name__ == '__main__':
+if __name__ == '__main__': # for the developer.
     Style_shell().cmdloop()
     # s = MakeStyle('My Tools','R#title',['tools']*10,0,1)
     # print(s.StyleText())

@@ -1,15 +1,14 @@
-RULER = '-'*43
+RULER = '╌'*43
 
 # main shell texts...
 HELP_MAIN ='''
-              Y#N404-Tool R#vB#{C#0.8B#}
+             Y#N404-Tool R#vB#{C#0.9B#}
 
  sections:
 ***RULER***
   Tools     There are more than 200 tools.
   Style     Create your own style.
   Hash      New and complex encryption.
-  Fishing   Hack through fake pages.
   Telebot   Create your own telegram bot.
 ***RULER***
 

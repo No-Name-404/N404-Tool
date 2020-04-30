@@ -5,8 +5,7 @@ import os ,sys ,subprocess
 
 from tools import (
         Tools_shell,Style_shell,
-        Hash_shell,Fishing_shell,
-        Telebot_shell,
+        Hash_shell,Telebot_shell
         )
 
 from tools.root import (
@@ -56,11 +55,12 @@ class shell(SHELL_ALL):
         Hash_shell.shell_main = super(shell,self).cmdloop
         Hash_shell().cmdloop(Hash_shell().help())
 
-    def do_Fishing(self,arg):
-        # start the Fishing section...
-        # Fishing_shell.shell_main = super(shell,self).cmdloop
-        # Fishing_shell().cmdloop(Fishing_shell().help())
-        print ('It will be available soon...')
+    # delete XXX
+    # def do_Fishing(self,arg):
+    #     # start the Fishing section...
+    #     # Fishing_shell.shell_main = super(shell,self).cmdloop
+    #     # Fishing_shell().cmdloop(Fishing_shell().help())
+    #     print ('It will be available soon...')
 
     def do_Telebot(self,arg):
         # start the Telebot section...
@@ -70,41 +70,51 @@ class shell(SHELL_ALL):
 
 if __name__=='__main__': # Check if run as main
     if len(sys.argv) > 1:
-        if sys.argv[1] == '--Hash':
+        if sys.argv[1] == 'Hash':
             shell().do_Hash(None)
-        elif sys.argv[1] == '--Style':
+
+        elif sys.argv[1] == 'Style':
             shell().do_Style(None)
-        elif sys.argv[1] == '--Tools':
+
+        elif sys.argv[1] == 'Tools':
             shell().do_Tools(None)
-        elif sys.argv[1] == '--Fishing':
+
+        elif sys.argv[1] == 'Fishing':
             shell().do_Fishing(None)
-        elif sys.argv[1] == '--Telebot':
+
+        elif sys.argv[1] == 'Telebot':
             shell().do_Telebot(None)
-        elif sys.argv[1] == '--EasyCmd':
+
+        elif sys.argv[1] == 'EasyCmd':
             EasyCmd = EasyCmd()
             EasyCmd.write()
-            EasyCmd.end()
-        elif sys.argv[1] == '--New':
+
+        elif sys.argv[1] == 'Update':
+            shell().do_update(None)
+
+        elif sys.argv[1] == 'New':
             print ('''
 N404-Tool:
 
     EasyCmd has been added..
     to use :
-    N404-Tool --EasyCmd
+    N404-Tool EasyCmd
 ''')
 
         else:
             print ('''
 N404-Tool:
 
- --Tools     To open Tools section.
- --Style     To open Style section.
- --Hash      To open Hash section.
- --Fishing   To open Fishing section.
- --Telebot   To open Telebot section.
+ Tools     To open Tools section.
+ Style     To open Style section.
+ Hash      To open Hash section.
+ Fishing   To open Fishing section.
+ Telebot   To open Telebot section.
 
- --EasyCmd   Shortcuts to commands.
- --New       What is the New ?
+ EasyCmd   Shortcuts to commands.
+ Update    To update the tool.
+
+ New       What is the New ?
 ''')
     else:
         shell().cmdloop() # start the N404-Tool

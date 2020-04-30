@@ -15,11 +15,11 @@ class SHELL_ALL(Cmd):
         super(SHELL_ALL,self).__init__()
         self.intro = self.help()
 
-    def SQUARE(self,HELP,type=True):
+    def SQUARE(self,HELP,type=True): # Tool DESIGN
         S = 'G#[Y#+G#]'
         if type:
             return Style(HELP).Square(
-            Square=[S,' G#| ',S,'-',S,' G#|',S,'-'])
+            Square=[S,' G#│ ',S,'─',S,' G#│',S,'─'])
         else:
             Animation.SlowLine(HELP,t=0.02)
 
@@ -93,8 +93,9 @@ alias d='cd ~/Desktop/'
             if self.text not in file:
                 with open(self.bash_file,'a') as f:
                     f.write(self.text)
+            self.end()
         else:
-            print (Color.reader('Error...\nThe bash.bashrc file not found'))
+            print (Color.reader('R#Error...\nThe W#bash.bashrc R#file not found'))
 
     def end(self):
         info = self.text.split("alias ")
@@ -104,10 +105,11 @@ alias d='cd ~/Desktop/'
                 temp[i.split('=')[0]]=i.split('=')[1].replace("'","")
             except IndexError:
                 pass
-        print (Color.reader('G#Done...\nThis is the list of abbreviations :\n'))
+        info = ''
         for x,y in temp.items():
-            y = y.replace('\n# end...','\033[0;37m')
+            y = y.replace('\n# end...','')
             if len(x) == 2:
-                print (Color.reader(f'G#{x} C#: Y#{y}'),end='')
+                info += f'B#{x} R#: W#{y}'
             elif len(x) == 1:
-                print (Color.reader(f'G#{x}  C#: Y#{y}'),end='')
+                info += f'B#{x}  R#: W#{y}'
+        print (SHELL_ALL().SQUARE(info[0:-1])+'\033[0;37m')
