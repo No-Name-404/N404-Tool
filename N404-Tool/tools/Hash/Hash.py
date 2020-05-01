@@ -50,7 +50,7 @@ class hashing:
         name = name.split('/')[-1]
         print (Color.reader(f'Y#start hashingW#...R#[B# {name} R#]'))
         time.sleep(0.6)
-        
+
     def md5(self):
         def encode(path):
             self.msg(path)
@@ -175,9 +175,11 @@ class Hash_shell(SHELL_ALL):
                 NoError = False
                 print(f'Error: {set}: type hash not found')
         elif name == 'path':
-            if os.path.isfile(os.path.join(self.PATH_H,set)) and os.path.join(self.PATH_H,set).endswith('.py') :
+            if os.path.isfile(os.path.join(self.PATH_H,set)) and os.path.join(self.PATH_H,set).endswith('.py'):
                 self.file_or_folder = set
             elif os.path.isdir(os.path.join(self.PATH_H,set)):
+                self.file_or_folder = set
+            elif os.path.isfile(set) or os.path.isdir(set):
                 self.file_or_folder = set
             else:
                 NoError = False

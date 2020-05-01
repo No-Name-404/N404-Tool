@@ -112,6 +112,9 @@ class Telebot_shell(SHELL_ALL):
             if os.path.isfile(os.path.join(os.getcwd(),set)) :
                 self.database = os.path.join(os.getcwd(),set)
                 self.save()
+            elif os.path.isfile(set):
+                self.database = set
+                self.save()
             else:
                 NoError = False
                 print(f'path: {set}: not exist')

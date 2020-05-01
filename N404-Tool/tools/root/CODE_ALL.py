@@ -1,6 +1,7 @@
 import os
 from My_Style import Color,Style,Animation
 from cmd import Cmd
+from tools.root.db import RULER
 Color.Theme('light')
 
 # DESIGN and CODE - ALL TOOL...
@@ -105,11 +106,11 @@ alias d='cd ~/Desktop/'
                 temp[i.split('=')[0]]=i.split('=')[1].replace("'","")
             except IndexError:
                 pass
-        info = ''
+        info = f'\n commands:\n{RULER}\n'
         for x,y in temp.items():
             y = y.replace('\n# end...','')
             if len(x) == 2:
-                info += f'B#{x} R#: W#{y}'
+                info += f'  Y#{x}C#: P#{y}'
             elif len(x) == 1:
-                info += f'B#{x}  R#: W#{y}'
-        print (SHELL_ALL().SQUARE(info[0:-1])+'\033[0;37m')
+                info += f'  Y#{x} C#: P#{y}'
+        print (SHELL_ALL().SQUARE(info+RULER+'\n')+'\033[0;37m')

@@ -17,6 +17,8 @@ EasyCmd,
 TOOLS_PATH,
 XPATH )
 
+from tools.root.db import RULER
+
 # The Theme of the tool
 Color.Theme('light')
 
@@ -93,28 +95,35 @@ if __name__=='__main__': # Check if run as main
             shell().do_update(None)
 
         elif sys.argv[1] == 'New':
-            print ('''
-N404-Tool:
+            print (SHELL_ALL().SQUARE(f'''
+ New:
+{RULER}
+  EasyCmd has been added..
+  Fix errors [path , database , install]
+  The Fishing section has been deleted...
+{RULER}
 
-    EasyCmd has been added..
-    to use :
-    N404-Tool EasyCmd
-''')
+ To use:
+{RULER}
+  N404-Tool EasyCmd
+{RULER}
+'''))
 
         else:
-            print ('''
-N404-Tool:
-
- Tools     To open Tools section.
- Style     To open Style section.
- Hash      To open Hash section.
- Fishing   To open Fishing section.
- Telebot   To open Telebot section.
-
- EasyCmd   Shortcuts to commands.
- Update    To update the tool.
-
- New       What is the New ?
-''')
+            print (SHELL_ALL().SQUARE(f'''
+ N404-Tool:
+{RULER}
+  Tools     To open Tools section.
+  Style     To open Style section.
+  Hash      To open Hash section.
+  Fishing   To open Fishing section.
+  Telebot   To open Telebot section.
+{RULER}
+  EasyCmd   Shortcuts to commands.
+  Update    To update the tool.
+{RULER}
+  New       What is the New ?
+{RULER}
+'''))
     else:
         shell().cmdloop() # start the N404-Tool
