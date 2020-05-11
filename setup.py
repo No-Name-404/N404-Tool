@@ -1,5 +1,5 @@
 #!/usr/bin/python3 -B
-import os,sys,subprocess
+import os,sys,subprocess,time
 from distutils.spawn import find_executable
 is_exist = lambda text:True if find_executable(
                             str(text)) else False
