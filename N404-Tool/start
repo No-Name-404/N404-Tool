@@ -36,7 +36,7 @@ class shell(SHELL_ALL):
         subprocess.run('python3 -B setup.py',shell=True)
         print(Color.reader('\033[0;37m[ G#OK\033[0;37m ] N404-Tool has been downloaded...'))
         print(Color.reader('\033[0;37m[ G#OK\033[0;37m ] N404-Tool has been setup...'))
-        exit(Color.reader('G#Done: W#run the tool agin...'))
+        exit(Color.reader('G#Done: W#run the tool agin...\033[0;37m'))
 
     def do_delete(self,arg):
         if 'com.termux' in os.getcwd():
