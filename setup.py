@@ -6,9 +6,9 @@ is_exist = lambda text:True if find_executable(
 
 if 'com.termux' in os.getcwd():
     DEL = 'rm -rif '
+    MV = 'mv '
     install = 'pkg install'
     root = ''
-    MV = 'mv '
     chmod = 'chmod 777 '
     python = 'pkg install python'
 else:
@@ -28,10 +28,14 @@ class setup:
         'pip3':root+install+' python3-pip',
         'python3':python,
     }
-
     libs = {
         'N4Tools':root+'pip3 install N4Tools',
         'requests':root+'pip3 install requests',
+        'six':root+'pip3 install six',
+        'chardet':root+'pip3 install chardet',
+        'urllib3':root+'pip3 install urllib3',
+        'certifi':root+'pip3 install certifi',
+        'idna':root+'pip3 install idna'
         'telebot':root+'pip3 install pyTelegramBotAPI',
     }
     def run(self):
@@ -39,6 +43,7 @@ class setup:
         self.shell()
         self.module()
         self.setup()
+        self.Check()
 
     def setup(self):
         subprocess.run(DEL+os.environ['SHELL'].replace('bash', 'N404-Tool'),shell=True,capture_output=True)
@@ -53,7 +58,6 @@ class setup:
             subprocess.run(shell+' -y',shell=True)
         subprocess.run('pip3 install --upgrade pip',shell=True)
 
-        print ('\nChecking...')
         for name in self.tools:
             if is_exist(name):
                 self.test[name] = True
@@ -72,6 +76,7 @@ class setup:
                 self.test[name] = False
 
     def Check(self):
+        print ('\nChecking...')
         for name,check in self.test.items():
             if check:
                 print (f'\033[0;37m[ \033[1;32mOK\033[0;37m ] {name} has been installed...')

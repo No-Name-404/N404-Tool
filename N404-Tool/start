@@ -39,6 +39,10 @@ class shell(SHELL_ALL):
         exit(Color.reader('G#Done: W#run the tool agin...'))
 
     def do_delete(self,arg):
+        if 'com.termux' in os.getcwd():
+            DEL = 'rm -rif '
+        else:
+            DEL = 'sudo rm -rif '
         user = input(Color.reader('R#Do you really want to delete the tool?\n  [G#yR#/n] :\033[0;37m '))
         if user.lower().strip() == 'y':
             subprocess.run(DEL+os.environ['SHELL'].replace('bash', 'N404-Tool'),shell=True,capture_output=True)
