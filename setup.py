@@ -11,7 +11,7 @@ if 'com.termux' in os.getcwd():
     root = ''
     chmod = 'chmod 777 '
     python = 'pkg install python'
-    p3 = 'sudo python -m '
+    p3 = 'python -m '
 else:
     DEL = 'sudo rm -rif '
     MV = 'sudo mv '

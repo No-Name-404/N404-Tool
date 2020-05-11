@@ -1,8 +1,8 @@
 #!/usr/bin/python3 -B
 import os, sys
-from My_Style import is_exist
+from N4Tools.System import is_in_bin
 
-if is_exist('sudo'):
+if is_in_bin('sudo'):
     root = 'sudo '
 else:
     root = ''
