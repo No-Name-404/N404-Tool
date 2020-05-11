@@ -17,6 +17,7 @@ class SHELL_ALL(Cmd):
         self.intro = self.help()
 
     def SQUARE(self,HELP,type=True): # Tool DESIGN
+        os.system('clear')
         S = 'G#[Y#+G#]'
         if type:
             return Style(HELP).Square(
