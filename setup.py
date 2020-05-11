@@ -62,10 +62,13 @@ class setup:
 
     def module(self):
         for name,lib in self.libs.items():
-            check = subprocess.run(lib,shell=True)
-            if check.stderr.decode('utf-8') == '':
+            subprocess.run(lib,shell=True)
+
+        for name,lib in self.libs.items():
+            try:
+                exec(f'import {name}')
                 self.test[name] = True
-            else:
+            except ModuleNotFoundError:
                 self.test[name] = False
 
     def Check(self):
