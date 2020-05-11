@@ -1,6 +1,6 @@
 #!/usr/bin/python3 -B
 from cmd import Cmd
-from My_Style import Color,Style,Animation,is_exist
+from N4Tools.Design import Color,Style,Animation
 import os ,sys ,subprocess
 
 from tools import (
@@ -24,7 +24,7 @@ Color.Theme('light')
 
 class shell(SHELL_ALL):
     # the shell command...
-    prompt = PROMPT('No Name')
+    prompt = PROMPT('main')
 
     def help(self):
         return self.SQUARE(HELP)
@@ -37,6 +37,11 @@ class shell(SHELL_ALL):
         print(Color.reader('\033[0;37m[ G#OK\033[0;37m ] N404-Tool has been downloaded...'))
         print(Color.reader('\033[0;37m[ G#OK\033[0;37m ] N404-Tool has been setup...'))
         exit(Color.reader('G#Done: W#run the tool agin...'))
+
+    def do_delete(self,arg):
+        user = input(Color.reader('R#Do you really to delete the tool?\n  [G#yR#/n] :\033[0;37m '))
+        if user.lower().strip() == 'y':
+            # delete
 
     def do_about(self,arg):
         # display the About text...
@@ -56,13 +61,6 @@ class shell(SHELL_ALL):
         # start the Hash section...
         Hash_shell.shell_main = super(shell,self).cmdloop
         Hash_shell().cmdloop(Hash_shell().help())
-
-    # delete XXX
-    # def do_Fishing(self,arg):
-    #     # start the Fishing section...
-    #     # Fishing_shell.shell_main = super(shell,self).cmdloop
-    #     # Fishing_shell().cmdloop(Fishing_shell().help())
-    #     print ('It will be available soon...')
 
     def do_Telebot(self,arg):
         # start the Telebot section...

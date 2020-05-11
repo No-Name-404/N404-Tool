@@ -1,5 +1,5 @@
-from My_Style import (
-    Color,Style,Animation,is_exist
+from N4Tools.Design import (
+    Color,Style,Animation
     )
 import os ,sys ,base64 ,marshal ,py_compile ,time
 Color.Theme('light')
@@ -14,9 +14,10 @@ XPATH )
 
 class hashing:
     A = '#!/usr/bin/python3 -B\n'
-    def __init__(self,file_or_folder,type):
+    def __init__(self,file_or_folder,type,copy):
         self.path = os.path.join(os.getcwd(),file_or_folder)
         self.check = self.check_type()
+        self.copy = copy
         if type == 'md5':
             self.md5()
         elif type == 'marshal':
@@ -26,6 +27,15 @@ class hashing:
         elif type == 'malker':
             print ('soon...')
         print ('Done...')
+
+    def name_file(self,file,text):
+        if self.copy:
+            if file.endswith('.py'):
+                return file[0:-2]+text
+            else:
+                return file+'.'+text
+        elif self.copy == False:
+            return file
 
     def check_type(self):
         o = os.path
@@ -56,7 +66,7 @@ class hashing:
             self.msg(path)
             with open(path,'rb') as f:
                 rb_file = base64.b16encode(f.read())
-            with open(path[0:-2]+'md5','w') as f:
+            with open(self.name_file(path, 'md5'),'w') as f:
                 f.write(f"{self.A}import base64 as b\ndata = lambda x: x({rb_file})\nexec (compile(data(b.b16decode),'<N404-Tools>','exec'))")
         if self.check == 'file':
             encode(self.path)
@@ -70,7 +80,7 @@ class hashing:
             with open(path,'r') as f:
                 r_file = compile(f.read(),'<N404-Tool>','exec')
                 r_file = marshal.dumps(r_file)
-            with open(path[0:-2]+'marshal','w') as f:
+            with open(self.name_file(path, 'marshal'),'w') as f:
                 f.write(f"{self.A}import marshal as m\ndata = m.loads({r_file})\nexec (data)")
         if self.check == 'file':
             encode(self.path)
@@ -85,6 +95,8 @@ class hashing:
             bytecode_path = "%s.pyc" % (basename)
             # print("compiling %s to %s" % (source_path, bytecode_path))
             py_compile.compile(source_path, bytecode_path, "exec")
+            if self.copy == False:
+                os.system('rm '+source_path)
             return bytecode_path
         if self.check == 'file':
             encode(self.path)
@@ -122,6 +134,7 @@ class Hash_shell(SHELL_ALL):
     file_or_folder = None
     type = None
     PATH_H = os.getcwd()+'/'
+    copy = False
     # path from SHELL_ALL class
 
     def help(self):
@@ -140,6 +153,7 @@ class Hash_shell(SHELL_ALL):
         op = OPTIONS.format(
         type=type,
         file_or_folder=self.file_or_folder,
+        copy=self.copy,
         )
 
         op = self.SQUARE(op)
@@ -148,7 +162,7 @@ class Hash_shell(SHELL_ALL):
     def do_start(self,arg):
         # start hashing...
         if self.file_or_folder and self.type:
-            hashing(self.file_or_folder,self.type)
+            hashing(self.file_or_folder,self.type,self.copy)
         else:
             print ('Error: value not found')
 
@@ -184,6 +198,16 @@ class Hash_shell(SHELL_ALL):
             else:
                 NoError = False
                 print(f'path: {set}: not exist')
+        elif name == 'copy':
+            if set == 'True':
+                self.copy = True
+            elif set == 'False':
+                self.copy = 'False'
+            else:
+                NoError = False
+                Color.Theme('dark')
+                print(Color.reader(f'Error: {name}: set [ G#True W#or R#FalseW# ]'))
+                Color.Theme('light')
         else:
             NoError = False
             print(Color.reader(f'Error: {name}: command not found'))

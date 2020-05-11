@@ -6,7 +6,7 @@ if is_exist('sudo'):
     root = 'sudo '
 else:
     root = ''
-path = os.environ['_'].replace('bin/python3','lib/N404-Tool/start')
+path = os.environ['SHELL'].replace('bin/python3','lib/N404-Tool/start')
 if len(sys.argv) > 1:
    os.system(f'{root}python3 -B {path} '+sys.argv[1])
 else:

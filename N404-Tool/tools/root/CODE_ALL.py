@@ -1,5 +1,5 @@
 import os
-from My_Style import Color,Style,Animation
+from N4Tools.Design import Color,Style,Animation
 from cmd import Cmd
 from tools.root.db import RULER
 Color.Theme('light')
@@ -22,7 +22,7 @@ class SHELL_ALL(Cmd):
             return Style(HELP).Square(
             Square=[S,' G#│ ',S,'─',S,' G#│',S,'─'])
         else:
-            Animation.SlowLine(HELP,t=0.02)
+            Animation.SlowLine(HELP,t=0.01)
 
     def default(self, line):
         '''
@@ -36,6 +36,71 @@ class SHELL_ALL(Cmd):
 
     def do_exit(self,arg):
         exit('\033[0;37m')
+
+    def do_bash(self,arg):
+        os.system(arg)
+
+    def do_cat(self,arg):
+        try:
+            with open(os.path.join(os.getcwd(),arg),'rb') as f:
+                file = f.read().decode('utf-8')
+            print (file[0:-1] if file.endswith('\n') else file)
+        except UnicodeDecodeError as U:
+            print (U)
+        except FileNotFoundError as F:
+            print (F)
+
+    def do_ls(self,arg):
+        path = os.getcwd()
+        files = os.popen('ls').read()
+        files = files.split('\n')
+        output = ''
+        for i in files:
+            if os.path.isfile(os.path.join(path,i)):
+                output += '\033[0;37m'+i+'\n'
+            elif os.path.isdir(os.path.join(path,i)):
+                output += '\033[0;34m'+i+'\n'
+            else:
+                output += i
+        print(output[0:-1],end='')
+
+    def do_cd(self,arg):
+        try:
+            os.chdir(os.path.join(os.getcwd(),arg))
+            self.do_ls(' ')
+        except FileNotFoundError as E:
+            print (E)
+
+    def do_pwd(self,arg):
+        print(os.getcwd())
+
+    def do_rm(self,arg):
+        os.system('rm '+arg.strip())
+
+    def do_run(self,arg):
+        data = {
+        '.py':'python3',
+        '.pyc':'python3',
+        '.sh':'bash',
+        '.php':'php',
+        '.js':'node',
+        '.md':'cat',
+        '.txt':'cat',
+        }
+        if os.path.isfile(os.path.join(os.getcwd(),arg)):
+            Error = False
+            for end,code in data.items():
+                if arg.endswith(end):
+                    os.system(code+' '+arg)
+                    Error = False
+                    break
+                else:
+                    Error = True
+            if Error:
+                print('can not read this file.')
+        else:
+            print(f'Error: {arg}: not exist')
+
 
     def do_help(self,arg):
         if arg: # check if run as intro
@@ -51,6 +116,31 @@ class SHELL_ALL(Cmd):
             self.shell_main()
         except TypeError:
             print ('This is the Main page...')
+
+    # complete files name ...
+    def completeFiles(self,text):
+        files = os.popen('ls').read().split('\n')
+        if not text:
+            completions = files[:-1]
+        else:
+            completions = [
+                f
+                for f in files
+                if f.startswith(text)
+            ]
+        return completions
+
+    def complete_rm(self,*args):
+        return self.completeFiles(args[0])
+
+    def complete_cat(self,*args):
+        return self.completeFiles(args[0])
+
+    def complete_cd(self,*args):
+        return self.completeFiles(args[0])
+
+    def complete_run(self,*args):
+        return self.completeFiles(args[0])
 
 class EasyCmd:
     def __init__(self):

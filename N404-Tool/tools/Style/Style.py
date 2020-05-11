@@ -1,8 +1,8 @@
 from cmd import Cmd
-from My_Style import (
+from N4Tools.Design import (
     Color,Style,Animation,Text
     )
-from My_Style.Library import ProFunctions
+from N4Tools.Design import ProFunctions
 import os ,sys ,json ,time ,random
 
 from tools.root import (

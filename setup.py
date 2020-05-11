@@ -30,9 +30,7 @@ class setup:
     }
 
     libs = {
-        'flask':root+'pip3 install flask',
-        'flask_ngrok':root+'pip3 install flask_ngrok',
-        'My_Style':root+'pip3 install My_Style',
+        'N4Tools':root+'pip3 install N4Tools',
         'requests':root+'pip3 install requests',
         'telebot':root+'pip3 install pyTelegramBotAPI',
     }
@@ -58,25 +56,38 @@ class setup:
         print ('\nChecking...')
         for name in self.tools:
             if is_exist(name):
-                print (f'\033[0;37m[ \033[1;32mOK\033[0;37m ] {name} has been installed...')
                 self.test[name] = True
             else:
-                print (f'\033[0;37m[ \033[1;31mError\033[0;37m ] {name} has not been installed !!!')
                 self.test[name] = False
 
     def module(self):
         for name,lib in self.libs.items():
-            try:
-                exec(f'import {name}')
+            check = subprocess.run(lib,shell=True)
+            if check.stderr.decode('utf-8') == '':
+                self.test[name] = True
+            else:
+                self.test[name] = False
+
+    def Check(self):
+        for name,check in self.test.items():
+            if check:
                 print (f'\033[0;37m[ \033[1;32mOK\033[0;37m ] {name} has been installed...')
-            except ModuleNotFoundError:
-                check = subprocess.run(lib,shell=True,capture_output=True)
-                if check.stderr.decode('utf-8') == '':
-                    print (f'\033[0;37m[ \033[1;32mOK\033[0;37m ] {name} has been installed...')
-                    self.test[name] = True
+            else:
+                print (f'\033[0;37m[ \033[1;31mError\033[0;37m ] {name} has not been installed !!!')
+            time.sleep(0.5)
+        if len(sys.argv) > 1 and all([_ for x,_ in self.test.items()]):
+            print (f'\033[0;37m[ \033[1;32mOK\033[0;37m ] N404-Tool has been installed ')
+            print (f'To get start type \033[1;33mN404-Tool\033[0;37m')
+        else:
+            print (f'\033[0;31mThere are some problems that you must solve')
+            for name,check in self.test.items():
+                if chack:
+                    pass
                 else:
-                    print (f'\033[0;37m[ \033[1;31mError\033[0;37m ] {name} has not been installed !!!')
-                    self.test[name] = False
+                    try:
+                        print ('\033[0;37m'+name,'"\033[0;33m'+self.tools[name]+'\033[0;37m"')
+                    except:
+                        print ('\033[0;37m'+name,'"\033[0;33m'+self.libs[name]+'\033[0;37m"')
 
 if __name__=='__main__':
     setup = setup()

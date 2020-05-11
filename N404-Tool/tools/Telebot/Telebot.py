@@ -1,5 +1,5 @@
-from My_Style import (
-    Color,Style,Animation,is_exist
+from N4Tools.Design import (
+    Color,Style,Animation
     )
 from tools.root import (
 HELP_TELEBOT as HELP,

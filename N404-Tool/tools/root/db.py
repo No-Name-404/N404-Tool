@@ -16,7 +16,17 @@ HELP_MAIN ='''
 ***RULER***
   clear      Clear the screen.
   exit       Stop the Tool.
+  bash       e.g ( bash ls ).
+  run        e.g ( run a.py or a.sh or...)
+
+  cat        read files.
+  ls         show file and folder.
+  cd         open folder.
+  rm         delete files.
+  pwd        show the path.
+
   update     To update N404-Tool.
+  delete     To delete N404-Tool!!.
   about      About the developer.
 ***RULER***
 '''.replace('***RULER***', RULER)
@@ -106,23 +116,7 @@ OPTIONS_HASH = '''
 ***RULER***
   type : {type}
   path : {file_or_folder}
-***RULER***
-'''.replace('***RULER***', RULER)
-
-# Fishing shell texts...
-HELP_FISHING = '''
- sections:
-***RULER***
-  options    Display the options menu.
-  start      To start the Server.
-  main       Main page.
-***RULER***
-'''.replace('***RULER***', RULER)
-OPTIONS_FISHING = '''
- options:
-***RULER***
-  server : {server}
-  page : {page}
+  copy : {copy}
 ***RULER***
 '''.replace('***RULER***', RULER)
 

@@ -1,6 +1,8 @@
-from My_Style import (
-    Color,Style,Animation,is_exist
+from N4Tools.Design import (
+    Color,Style,Animation
     )
+
+from N4Tools.System import is_in_bin
 import os ,sys ,json ,time ,subprocess
 Color.Theme('light')
 
@@ -60,7 +62,7 @@ class Tools_shell(SHELL_ALL):
         tools_to_download = arg.split(' ')
         print ('please wait...')
         for i in tools_to_download:
-            if is_exist('sudo'):
+            if is_in_bin('sudo'):
                 git = 'sudo git clone '
             else:
                 git = 'git clone '
