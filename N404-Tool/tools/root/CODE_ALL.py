@@ -150,6 +150,7 @@ class EasyCmd:
             self.text = '''
 # From N404-Tool...
 alias i='pkg install'
+alias g='git clone'
 alias c='clear'
 alias p3='python3'
 alias p2='python2'
@@ -167,6 +168,7 @@ alias h='cd ~'
             self.text = '''
 # From N404-Tool...
 alias i='sudo apt-get install'
+alias g='git clone'
 alias c='clear'
 alias p3='sudo python3'
 alias p2='sudo python2'
