@@ -35,7 +35,7 @@ class setup:
         'chardet':root+'pip3 install chardet',
         'urllib3':root+'pip3 install urllib3',
         'certifi':root+'pip3 install certifi',
-        'idna':root+'pip3 install idna'
+        'idna':root+'pip3 install idna',
         'telebot':root+'pip3 install pyTelegramBotAPI',
     }
     def run(self):
