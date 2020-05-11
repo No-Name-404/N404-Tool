@@ -11,6 +11,7 @@ if 'com.termux' in os.getcwd():
     root = ''
     chmod = 'chmod 777 '
     python = 'pkg install python'
+    p3 = 'sudo python -m '
 else:
     DEL = 'sudo rm -rif '
     MV = 'sudo mv '
@@ -18,6 +19,7 @@ else:
     root = 'sudo '
     chmod = 'sudo chmod 777 '
     python = 'sudo apt-get install python3'
+    p3 = 'sudo python3 -m '
 
 class setup:
     test = {
@@ -29,20 +31,21 @@ class setup:
         'python3':python,
     }
     libs = {
-        'N4Tools':root+'pip3 install N4Tools',
-        'requests':root+'pip3 install requests',
-        'six':root+'pip3 install six',
-        'chardet':root+'pip3 install chardet',
-        'urllib3':root+'pip3 install urllib3',
-        'certifi':root+'pip3 install certifi',
-        'idna':root+'pip3 install idna',
-        'telebot':root+'pip3 install pyTelegramBotAPI',
+        'N4Tools':root+p3+'pip install N4Tools',
+        'requests':root+p3+'pip install requests',
+        'six':root+p3+'pip install six',
+        'chardet':root+p3+'pip install chardet',
+        'urllib3':root+p3+'pip install urllib3',
+        'certifi':root+p3+'pip install certifi',
+        'idna':root+p3+'pip install idna',
+        'telebot':root+p3+'pip install pyTelegramBotAPI',
     }
     def run(self):
         print ('please wait...')
         self.shell()
         self.module()
-        self.setup()
+        if all([_ for x,_ in self.test.items()]):
+            self.setup()
         self.Check()
 
     def setup(self):
@@ -86,10 +89,10 @@ class setup:
         if len(sys.argv) > 1 and all([_ for x,_ in self.test.items()]):
             print (f'\033[0;37m[ \033[1;32mOK\033[0;37m ] N404-Tool has been installed ')
             print (f'To get start type \033[1;33mN404-Tool\033[0;37m')
-        else:
+        elif all([_ for x,_ in self.test.items()]) == False:
             print (f'\033[0;31mThere are some problems that you must solve')
             for name,check in self.test.items():
-                if chack:
+                if check:
                     pass
                 else:
                     try:
