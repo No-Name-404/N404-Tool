@@ -36,7 +36,7 @@ class shell(SHELL_ALL):
 
     def do_update(self,arg):
         # download new version...
-        subprocess.run(DEL+'N404-Tool',shell=True,capture_output=True)
+        subprocess.run(DEL+'N404-Tool',shell=True)
         subprocess.run('git clone https://github.com/No-Name-404/N404-Tool',shell=True)
         os.chdir('N404-Tool/')
         subprocess.run('python3 -B setup.py',shell=True)
@@ -47,12 +47,12 @@ class shell(SHELL_ALL):
     def do_delete(self,arg):
         user = input(Color.reader('R#Do you really want to delete the tool?\n  [G#yR#/n] :\033[0;37m '))
         if user.lower().strip() == 'y':
-            subprocess.run(DEL+os.environ['SHELL'].replace('bash', 'N404-Tool'),shell=True,capture_output=True)
-            subprocess.run(DEL+os.environ['SHELL'].replace('bin/bash', 'lib/N404-Tool'),shell=True,capture_output=True)
-            subprocess.run(DEL+(os.getcwd() if os.getcwd().endswith('-Tool') else os.getcwd()+'/N404-Tool' ),shell=True,capture_output=True)
+            subprocess.run(DEL+os.environ['SHELL'].replace('bash', 'N404-Tool'),shell=True)
+            subprocess.run(DEL+os.environ['SHELL'].replace('bin/bash', 'lib/N404-Tool'),shell=True)
+            subprocess.run(DEL+(os.getcwd() if os.getcwd().endswith('-Tool') else os.getcwd()+'/N404-Tool' ),shell=True)
             user = input(Color.reader('R#Do you want to delete the database?\n  [G#yR#/n] :\033[0;37m '))
             if user.lower().strip() == 'y':
-                subprocess.run(DEL+os.environ['SHELL'].replace('bin/bash', 'lib/db.json'),shell=True,capture_output=True)
+                subprocess.run(DEL+os.environ['SHELL'].replace('bin/bash', 'lib/db.json'),shell=True)
             exit()
 
     def do_about(self,arg):
