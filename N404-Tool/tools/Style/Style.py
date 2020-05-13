@@ -69,7 +69,7 @@ class MakeStyle(ProFunctions):
         This is the final design.
         '''
         _c = self._c
-        Intro = Text(self.intro).Figlet() if self.intro else False
+        Intro = _c[1]+Text(self.intro).Figlet() if self.intro else False
 
         title = _set_c(self.title)+'\n'
         tools = [f'{_c[0]}{name} {_c[2]}[{_c[1]}{num+1}{_c[2]}]'
