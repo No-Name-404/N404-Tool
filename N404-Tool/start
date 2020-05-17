@@ -5,21 +5,17 @@ import os ,sys ,subprocess
 
 from tools import (
         Tools_shell,Style_shell,
-        Hash_shell,Telebot_shell
-        )
+        Hash_shell,Telebot_shell,
+        Password_shell)
 
 from tools.root import (
 HELP_MAIN as HELP, # text...
 ABOUT_MAIN as ABOUT, # text...
-PROMPT,
-SHELL_ALL,
-EasyCmd,
-TOOLS_PATH,
-XPATH )
+HELP_TOOL,NEW_TOOL,
+SHELL_ALL,EasyCmd,
+TOOLS_PATH,XPATH )
 
 from tools.root.db import RULER
-
-# The Theme of the tool
 Color.Theme('light')
 
 if 'com.termux' in os.getcwd():
@@ -27,16 +23,32 @@ if 'com.termux' in os.getcwd():
 else:
     DEL = 'sudo rm -rif '
 
-class shell(SHELL_ALL):
+# The code is very frequent,
+# this is the appropriate solution.
+temp = '''
+    def do_{name}(self,arg):
+        {name}_shell.shell_main = super(shell, self).cmdloop
+        {name}_shell().cmdloop({name}_shell().help())
+    '''
+sections = 'class Sections:'
+for i in ['Tools','Style','Hash','Telebot','Password']:
+    sections += temp.format(name=i)
+exec(sections)
+# end...
+
+class shell(SHELL_ALL,Sections):
     # the shell command...
-    prompt = PROMPT('main')
+    page = 'main'
+
+    def __init__(self):
+        super().__init__()
 
     def help(self):
         return self.SQUARE(HELP)
 
     def do_update(self,arg):
         # download new version...
-        subprocess.run(DEL+'N404-Tool',shell=True,capture_output=True)
+        subprocess.run(DEL+'N404-Tool',shell=True)
         subprocess.run('git clone https://github.com/No-Name-404/N404-Tool',shell=True)
         os.chdir('N404-Tool/')
         subprocess.run('python3 -B setup.py',shell=True)
@@ -45,95 +57,46 @@ class shell(SHELL_ALL):
         exit(Color.reader('G#Done: W#run the tool agin...\033[0;37m'))
 
     def do_delete(self,arg):
+        # delete the tool from the system...
         user = input(Color.reader('R#Do you really want to delete the tool?\n  [G#yR#/n] :\033[0;37m '))
         if user.lower().strip() == 'y':
-            subprocess.run(DEL+os.environ['SHELL'].replace('bash', 'N404-Tool'),shell=True,capture_output=True)
-            subprocess.run(DEL+os.environ['SHELL'].replace('bin/bash', 'lib/N404-Tool'),shell=True,capture_output=True)
-            subprocess.run(DEL+(os.getcwd() if os.getcwd().endswith('-Tool') else os.getcwd()+'/N404-Tool' ),shell=True,capture_output=True)
+            subprocess.run(DEL+os.environ['SHELL'].replace('bash', 'N404-Tool'),shell=True)
+            subprocess.run(DEL+os.environ['SHELL'].replace('bin/bash', 'lib/N404-Tool'),shell=True)
+            subprocess.run(DEL+(os.getcwd() if os.getcwd().endswith('-Tool') else os.getcwd()+'/N404-Tool' ),shell=True)
             user = input(Color.reader('R#Do you want to delete the database?\n  [G#yR#/n] :\033[0;37m '))
             if user.lower().strip() == 'y':
-                subprocess.run(DEL+os.environ['SHELL'].replace('bin/bash', 'lib/db.json'),shell=True,capture_output=True)
+                subprocess.run(DEL+os.environ['SHELL'].replace('bin/bash', 'lib/db.json'),shell=True)
             exit()
 
     def do_about(self,arg):
         # display the About text...
         self.SQUARE(self.SQUARE(ABOUT),type=False)
 
-    def do_Tools(self,arg):
-        # start the Tools section...
-        Tools_shell.shell_main = super(shell,self).cmdloop
-        Tools_shell().cmdloop(Tools_shell().help())
-
-    def do_Style(self,arg):
-        # start the Style section...
-        Style_shell.shell_main = super(shell,self).cmdloop
-        Style_shell().cmdloop(Style_shell().help())
-
-    def do_Hash(self,arg):
-        # start the Hash section...
-        Hash_shell.shell_main = super(shell,self).cmdloop
-        Hash_shell().cmdloop(Hash_shell().help())
-
-    def do_Telebot(self,arg):
-        # start the Telebot section...
-        Telebot_shell.shell_main = super(shell,self).cmdloop
-        Telebot_shell().cmdloop(Telebot_shell().help())
-        # print ('It will be available soon...')
-
 if __name__=='__main__': # Check if run as main
     if len(sys.argv) > 1:
+
         if sys.argv[1] == 'Hash':
-            shell().do_Hash(None)
-
+            shell().do_Hash(shell().cmdloop)
         elif sys.argv[1] == 'Style':
-            shell().do_Style(None)
-
+            shell().do_Style(shell().cmdloop)
         elif sys.argv[1] == 'Tools':
-            shell().do_Tools(None)
-
+            shell().do_Tools(shell().cmdloop)
         elif sys.argv[1] == 'Fishing':
-            shell().do_Fishing(None)
-
+            shell().do_Fishing(shell().cmdloop)
         elif sys.argv[1] == 'Telebot':
-            shell().do_Telebot(None)
+            shell().do_Telebot(shell().cmdloop)
+        elif sys.argv[1] == 'Password':
+            shell().do_Password(shell().cmdloop)
 
         elif sys.argv[1] == 'EasyCmd':
-            EasyCmd = EasyCmd()
+            shell().EasyCmd = EasyCmd()
             EasyCmd.write()
-
         elif sys.argv[1] == 'Update':
             shell().do_update(None)
-
         elif sys.argv[1] == 'New':
-            print (SHELL_ALL().SQUARE(f'''
- New:
-{RULER}
-  EasyCmd has been added..
-  Fix errors [path , database , install]
-  The Fishing section has been deleted...
-{RULER}
-
- To use:
-{RULER}
-  N404-Tool EasyCmd
-{RULER}
-'''))
+            print (NEW_TOOL)
 
         else:
-            print (SHELL_ALL().SQUARE(f'''
- N404-Tool:
-{RULER}
-  Tools     To open Tools section.
-  Style     To open Style section.
-  Hash      To open Hash section.
-  Fishing   To open Fishing section.
-  Telebot   To open Telebot section.
-{RULER}
-  EasyCmd   Shortcuts to commands.
-  Update    To update the tool.
-{RULER}
-  New       What is the New ?
-{RULER}
-'''))
+            print (HELP_TOOL)
     else:
         shell().cmdloop() # start the N404-Tool

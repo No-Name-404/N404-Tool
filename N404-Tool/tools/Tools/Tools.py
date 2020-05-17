@@ -9,7 +9,6 @@ Color.Theme('light')
 from tools.root import (
 HELP_TOOLS as HELP,
 OPTIONS_TOOLS as OPTIONS,
-PROMPT,
 SHELL_ALL,
 TOOLS_PATH,
 XPATH )
@@ -20,7 +19,7 @@ with open(TOOLS_PATH+'Tools/.clone.json') as file:
 
 class Tools_shell(SHELL_ALL):
     # the shell command...
-    prompt = PROMPT('Tools')
+    page = 'Tools'
 
     def __init__(self):
         super(Tools_shell,self).__init__()

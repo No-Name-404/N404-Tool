@@ -130,7 +130,8 @@ class hashing:
 
 class Hash_shell(SHELL_ALL):
     # the shell command...
-    prompt = PROMPT('Hash')
+    page = 'Hash'
+    # prompt = PROMPT('Hash')
     file_or_folder = None
     type = None
     PATH_H = os.getcwd()+'/'

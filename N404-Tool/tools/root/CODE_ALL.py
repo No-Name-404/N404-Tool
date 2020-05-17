@@ -1,13 +1,27 @@
-import os
+import os, textwrap, shutil, subprocess
 from N4Tools.Design import Color,Style,Animation
 from cmd import Cmd
-from tools.root.db import RULER
+from tools.root.db import RULER,Errors
 Color.Theme('light')
 
+# os.uname().sysname
 # DESIGN and CODE - ALL TOOL...
-PROMPT = lambda text:Color.reader(f'G#┌───B#[ C#{os.uname().sysname}B# ]G##B#[ Y#{os.uname().nodename} B#]G##B#[ R#{text} B#]G#>>>\nG#|\nG#└─>>>W#$ \033[0;37m')
+PROMPT = lambda text,pwd:Color.reader(f'G#┌───B#[ C#{pwd}B# ]G##B#[ Y#{os.uname().nodename} B#]G##B#[ R#{text} B#]G#>>>\nG#|\nG#└─>>>W#$ \033[0;37m')
+
+def style_dir(list):
+    max = 0
+    output = ''
+    for i in list:
+        r_i = Color().remove_c(i)
+        if len(r_i) > max:
+            max = len(r_i)
+    for i in list:
+        r_i = Color().remove_c(i)
+        output += f'{i}{" "*(max-len(r_i))}  '
+    return output
 
 class SHELL_ALL(Cmd):
+    page = 'main'
     shell_main = None
     path = os.environ['HOME'] # user path (home or root)
     tool_path = os.getcwd()
@@ -15,6 +29,10 @@ class SHELL_ALL(Cmd):
     def __init__(self):
         super(SHELL_ALL,self).__init__()
         self.intro = self.help()
+        self.prompt = PROMPT(self.page,os.getcwd().split("/")[-1])
+
+    def get_terminal_size(self):
+        return shutil.get_terminal_size().columns
 
     def SQUARE(self,HELP,type=True): # Tool DESIGN
         os.system('clear')
@@ -24,6 +42,12 @@ class SHELL_ALL(Cmd):
             Square=[S,' G#│ ',S,'─',S,' G#│',S,'─'])
         else:
             Animation.SlowLine(HELP,t=0.01)
+
+    def cmdloop(self,*arg,**kwargs):
+        try:
+            super().cmdloop(*arg,**kwargs)
+        except KeyboardInterrupt:# if click (ctrl + c)
+            exit('\n')
 
     def default(self, line):
         '''
@@ -49,7 +73,9 @@ class SHELL_ALL(Cmd):
         except UnicodeDecodeError as U:
             print (U)
         except FileNotFoundError as F:
-            print (F)
+            print (Errors['FileNotFoundError'].format(arg))
+        except IsADirectoryError:
+            print(Errors['IsADirectoryError'].format(arg))
 
     def do_ls(self,arg):
         path = os.getcwd()
@@ -58,19 +84,28 @@ class SHELL_ALL(Cmd):
         output = ''
         for i in files:
             if os.path.isfile(os.path.join(path,i)):
-                output += '\033[0;37m'+i+'\n'
+                output += '\033[0;37m'+i+' '
             elif os.path.isdir(os.path.join(path,i)):
-                output += '\033[0;34m'+i+'\n'
+                output += '\033[1;34m'+i+' '
             else:
                 output += i
-        print(output[0:-1],end='')
+        output = output[0:-1].split(' ')
+        output = style_dir(output).strip()
+        print (textwrap.fill(output,self.get_terminal_size()).strip())
 
     def do_cd(self,arg):
         try:
-            os.chdir(os.path.join(os.getcwd(),arg))
-            self.do_ls(' ')
-        except FileNotFoundError as E:
-            print (E)
+            if arg in ['~','$HOME','']:
+                os.chdir(os.environ['HOME'])
+                self.do_ls('')
+            else:
+                os.chdir(os.path.join(os.getcwd(),arg))
+                self.do_ls('')
+            self.prompt = PROMPT(self.page,os.getcwd().split("/")[-1])
+        except FileNotFoundError:
+            print (Errors['FileNotFoundError'].format(arg))
+        except NotADirectoryError:
+            print (Errors['NotADirectoryError'].format(arg))
 
     def do_pwd(self,arg):
         print(os.getcwd())
@@ -114,6 +149,7 @@ class SHELL_ALL(Cmd):
 
     def do_main(self,arg):
         try:
+            os.system('clear')
             self.shell_main()
         except TypeError:
             print ('This is the Main page...')

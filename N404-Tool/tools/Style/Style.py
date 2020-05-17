@@ -8,7 +8,6 @@ import os ,sys ,json ,time ,random
 from tools.root import (
 HELP_STYLE as HELP,
 OPTIONS_STYLE as OPTIONS,
-PROMPT,
 SHELL_ALL )
 
 Color.Theme('light')
@@ -118,7 +117,7 @@ class MakeStyle(ProFunctions):
         Color.reader(f' {_c[1]}╟--[{_c[0]}###{_c[1]}]--╢'))
 
 class Style_shell(SHELL_ALL):
-    prompt = PROMPT('Style')
+    page = 'Style'
 
     # options...
     Intro = None

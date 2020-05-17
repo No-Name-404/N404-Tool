@@ -1,4 +1,45 @@
+import shutil
+
 RULER = '╌'*43
+RULER_PRO = '╌'*shutil.get_terminal_size().columns
+
+# Errors...
+Errors={
+'FileNotFoundError':'bash: cd: {}: No such file or directory',
+'NotADirectoryError':'bash: cd: {}: Not a directory',
+'IsADirectoryError':'cat: {}: Is a directory',
+}
+
+# TOOL ...
+NEW_TOOL = f'''
+ New:
+{RULER_PRO}
+  EasyCmd has been added..
+  Fix errors [path , database , install]
+  The Fishing section has been deleted...
+{RULER_PRO}
+
+ To use:
+{RULER_PRO}
+  N404-Tool EasyCmd
+{RULER_PRO}
+'''
+
+HELP_TOOL = f'''
+ N404-Tool:
+{RULER_PRO}
+  Tools     To open Tools section.
+  Style     To open Style section.
+  Hash      To open Hash section.
+  Telebot   To open Telebot section.
+  Password  To open Password section.
+{RULER_PRO}
+  EasyCmd   Shortcuts to commands.
+  Update    To update the tool.
+{RULER_PRO}
+  New       What is the New ?
+{RULER_PRO}
+'''
 
 # main shell texts...
 HELP_MAIN ='''
@@ -10,6 +51,7 @@ HELP_MAIN ='''
   Style     Create your own style.
   Hash      New and complex encryption.
   Telebot   Create your own telegram bot.
+  password  To create list of passwords.
 ***RULER***
 
  system:
@@ -134,5 +176,22 @@ OPTIONS_TELEBOT = '''
 ***RULER***
   token : {token}
   database : {database}
+***RULER***
+'''.replace('***RULER***', RULER)
+
+#
+HELP_PASSWORD ='''
+ sections:
+***RULER***
+  options    Display the options menu.
+  start      To start the counter.
+  main       Main page.
+***RULER***
+'''.replace('***RULER***', RULER)
+OPTIONS_PASSWORD = '''
+ options:
+***RULER***
+  type : {type} R## text or numder
+  list : {list}
 ***RULER***
 '''.replace('***RULER***', RULER)

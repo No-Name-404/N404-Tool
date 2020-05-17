@@ -44,9 +44,9 @@ class setup:
         print ('please wait...')
         self.shell()
         self.module()
+        self.Check()
         if all([_ for x,_ in self.test.items()]):
             self.setup()
-        self.Check()
 
     def setup(self):
         subprocess.run(DEL+os.environ['SHELL'].replace('bash', 'N404-Tool'),shell=True,capture_output=True)
@@ -88,7 +88,7 @@ class setup:
             time.sleep(0.5)
         if len(sys.argv) > 1 and all([_ for x,_ in self.test.items()]):
             print (f'\033[0;37m[ \033[1;32mOK\033[0;37m ] N404-Tool has been installed ')
-            print (f'To get start type \033[1;33mN404-Tool\033[0;37m')
+            print (f'To get start type \033[1;33mN404-Tool\033[0m')
         elif all([_ for x,_ in self.test.items()]) == False:
             print (f'\033[0;31mThere are some problems that you must solve')
             for name,check in self.test.items():
@@ -96,9 +96,9 @@ class setup:
                     pass
                 else:
                     try:
-                        print ('\033[0;37m'+name,'"\033[0;33m'+self.tools[name]+'\033[0;37m"')
+                        print ('\033[0;37m'+name,'"\033[0;33m'+self.tools[name]+'\033[0m"')
                     except:
-                        print ('\033[0;37m'+name,'"\033[0;33m'+self.libs[name]+'\033[0;37m"')
+                        print ('\033[0;37m'+name,'"\033[0;33m'+self.libs[name]+'\033[0m"')
 
 if __name__=='__main__':
     setup = setup()

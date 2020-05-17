@@ -4,7 +4,6 @@ from N4Tools.Design import (
 from tools.root import (
 HELP_TELEBOT as HELP,
 OPTIONS_TELEBOT as OPTIONS,
-PROMPT,
 SHELL_ALL,
 TOOLS_PATH,
 XPATH )
@@ -13,7 +12,7 @@ import telebot ,json ,os
 
 class Telebot_shell(SHELL_ALL):
     # the shell command...
-    prompt = PROMPT('Telebot')
+    page = 'Telebot'
     token = None
     database = None
 
