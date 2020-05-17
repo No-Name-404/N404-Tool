@@ -2,6 +2,8 @@ import shutil
 
 terminal_size = shutil.get_terminal_size().columns
 RULER = '╌'*(terminal_size-6)
+RULER_UOT = '╌'*(terminal_size)
+
 
 # Errors...
 Errors={
@@ -13,32 +15,32 @@ Errors={
 # TOOL ...
 NEW_TOOL = f'''
  New:
-{RULER}
+{RULER_UOT}
   EasyCmd has been added..
   Fix errors [path , database , install]
   The Fishing section has been deleted...
-{RULER}
+{RULER_UOT}
 
  To use:
-{RULER}
+{RULER_UOT}
   N404-Tool EasyCmd
-{RULER}
+{RULER_UOT}
 '''
 
 HELP_TOOL = f'''
  N404-Tool:
-{RULER}
+{RULER_UOT}
   Tools     To open Tools section.
   Style     To open Style section.
   Hash      To open Hash section.
   Telebot   To open Telebot section.
   Password  To open Password section.
-{RULER}
+{RULER_UOT}
   EasyCmd   Shortcuts to commands.
   Update    To update the tool.
-{RULER}
+{RULER_UOT}
   New       What is the New ?
-{RULER}
+{RULER_UOT}
 '''
 
 # main shell texts...

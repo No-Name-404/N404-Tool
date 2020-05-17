@@ -1,7 +1,7 @@
 import os, textwrap, shutil, subprocess
 from N4Tools.Design import Color,Style,Animation
 from cmd import Cmd
-from tools.root.db import RULER,Errors
+from tools.root.db import Errors,RULER_UOT
 Color.Theme('light')
 
 # os.uname().sysname
@@ -235,11 +235,11 @@ alias d='cd ~/Desktop/'
                 temp[i.split('=')[0]]=i.split('=')[1].replace("'","")
             except IndexError:
                 pass
-        info = f'\n\033[0m commands:\n{RULER}\n'
+        info = f'\n\033[0m commands:\n{RULER_UOT}\n'
         for x,y in temp.items():
             y = y.replace('\n# end...','')
             if len(x) == 2:
                 info += f'  Y#{x}C#: P#{y}\033[0m'
             elif len(x) == 1:
                 info += f'  Y#{x} C#: P#{y}\033[0m'
-        print (Color.reader(info+RULER+'\n'))
+        print (Color.reader(info+RULER_UOT+'\n'))
