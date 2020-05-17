@@ -74,26 +74,24 @@ class shell(SHELL_ALL,Sections):
 
 if __name__=='__main__': # Check if run as main
     if len(sys.argv) > 1:
-
-        if sys.argv[1] == 'Hash':
+        text = sys.argv[1].lower()
+        if text == 'hash':
             shell().do_Hash(shell().cmdloop)
-        elif sys.argv[1] == 'Style':
+        elif text == 'style':
             shell().do_Style(shell().cmdloop)
-        elif sys.argv[1] == 'Tools':
+        elif text == 'tools':
             shell().do_Tools(shell().cmdloop)
-        elif sys.argv[1] == 'Fishing':
-            shell().do_Fishing(shell().cmdloop)
-        elif sys.argv[1] == 'Telebot':
+        elif text == 'telebot':
             shell().do_Telebot(shell().cmdloop)
-        elif sys.argv[1] == 'Password':
+        elif text == 'password':
             shell().do_Password(shell().cmdloop)
 
-        elif sys.argv[1] == 'EasyCmd':
-            shell().EasyCmd = EasyCmd()
+        elif text == 'easycmd':
+            EasyCmd = EasyCmd()
             EasyCmd.write()
-        elif sys.argv[1] == 'Update':
+        elif text == 'update':
             shell().do_update(None)
-        elif sys.argv[1] == 'New':
+        elif text == 'new':
             print (NEW_TOOL)
 
         else:

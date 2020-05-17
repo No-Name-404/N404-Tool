@@ -46,8 +46,8 @@ class SHELL_ALL(Cmd):
     def cmdloop(self,*arg,**kwargs):
         try:
             super().cmdloop(*arg,**kwargs)
-        except KeyboardInterrupt:# if click (ctrl + c)
-            exit('\n')
+        except KeyboardInterrupt:# if user click (ctrl + c)
+            exit('\n\033[0m')
 
     def default(self, line):
         '''
@@ -60,7 +60,7 @@ class SHELL_ALL(Cmd):
         os.system('clear')
 
     def do_exit(self,arg):
-        exit('\033[0;37m')
+        exit('\033[0m')
 
     def do_bash(self,arg):
         os.system(arg)
@@ -235,11 +235,11 @@ alias d='cd ~/Desktop/'
                 temp[i.split('=')[0]]=i.split('=')[1].replace("'","")
             except IndexError:
                 pass
-        info = f'\n commands:\n{RULER}\n'
+        info = f'\n\033[0m commands:\n{RULER}\n'
         for x,y in temp.items():
             y = y.replace('\n# end...','')
             if len(x) == 2:
-                info += f'  Y#{x}C#: P#{y}'
+                info += f'  Y#{x}C#: P#{y}\033[0m'
             elif len(x) == 1:
-                info += f'  Y#{x} C#: P#{y}'
-        print (SHELL_ALL().SQUARE(info+RULER+'\n')+'\033[0;37m')
+                info += f'  Y#{x} C#: P#{y}\033[0m'
+        print (Color.reader(info+RULER+'\n'))
