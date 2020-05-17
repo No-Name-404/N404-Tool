@@ -49,12 +49,12 @@ class setup:
             self.setup()
 
     def setup(self):
-        subprocess.run(DEL+os.environ['SHELL'].replace('bash', 'N404-Tool'),shell=True,capture_output=True)
-        subprocess.run(MV+'N404-Tool/N404-Tool '+os.environ['SHELL'].replace('bash', ''),shell=True,capture_output=True)
-        subprocess.run(chmod+os.environ['SHELL'].replace('bash', 'N404-Tool'),shell=True,capture_output=True)
-        subprocess.run(DEL+os.environ['SHELL'].replace('bin/bash', 'lib/N404-Tool'),shell=True,capture_output=True)
-        subprocess.run(MV+'N404-Tool '+os.environ['SHELL'].replace('bin/bash', 'lib/'),shell=True,capture_output=True)
-        subprocess.run(DEL+(os.getcwd() if os.getcwd().endswith('-Tool') else os.getcwd()+'/N404-Tool' ),shell=True,capture_output=True)
+        subprocess.run(DEL+os.environ['SHELL'].replace('bash', 'N404-Tool'),shell=True)
+        subprocess.run(MV+'N404-Tool/N404-Tool '+os.environ['SHELL'].replace('bash', ''),shell=True)
+        subprocess.run(chmod+os.environ['SHELL'].replace('bash', 'N404-Tool'),shell=True)
+        subprocess.run(DEL+os.environ['SHELL'].replace('bin/bash', 'lib/N404-Tool'),shell=True)
+        subprocess.run(MV+'N404-Tool '+os.environ['SHELL'].replace('bin/bash', 'lib/'),shell=True)
+        subprocess.run(DEL+(os.getcwd() if os.getcwd().endswith('-Tool') else os.getcwd()+'/N404-Tool' ),shell=True)
 
     def shell(self):
         for name,shell in self.tools.items():

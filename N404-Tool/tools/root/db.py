@@ -43,7 +43,7 @@ HELP_TOOL = f'''
 
 # main shell texts...
 HELP_MAIN ='''
-             Y#N404-Tool R#vB#{C#0.9B#}
+             Y#N404-Tool R#vB#{C#1.0B#}
 
  sections:
 ***RULER***
