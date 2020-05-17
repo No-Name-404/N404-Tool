@@ -1,7 +1,7 @@
 import shutil
 
-RULER = '╌'*43
-RULER_PRO = '╌'*shutil.get_terminal_size().columns
+terminal_size = shutil.get_terminal_size().columns
+RULER = '╌'*(terminal_size-6)
 
 # Errors...
 Errors={
@@ -13,37 +13,37 @@ Errors={
 # TOOL ...
 NEW_TOOL = f'''
  New:
-{RULER_PRO}
+{RULER}
   EasyCmd has been added..
   Fix errors [path , database , install]
   The Fishing section has been deleted...
-{RULER_PRO}
+{RULER}
 
  To use:
-{RULER_PRO}
+{RULER}
   N404-Tool EasyCmd
-{RULER_PRO}
+{RULER}
 '''
 
 HELP_TOOL = f'''
  N404-Tool:
-{RULER_PRO}
+{RULER}
   Tools     To open Tools section.
   Style     To open Style section.
   Hash      To open Hash section.
   Telebot   To open Telebot section.
   Password  To open Password section.
-{RULER_PRO}
+{RULER}
   EasyCmd   Shortcuts to commands.
   Update    To update the tool.
-{RULER_PRO}
+{RULER}
   New       What is the New ?
-{RULER_PRO}
+{RULER}
 '''
 
 # main shell texts...
 HELP_MAIN ='''
-             Y#N404-Tool R#vB#{C#1.0B#}
+***SPACE***Y#N404-Tool R#vB#{C#1.0B#}
 
  sections:
 ***RULER***
@@ -71,7 +71,7 @@ HELP_MAIN ='''
   delete     To delete N404-Tool!!.
   about      About the developer.
 ***RULER***
-'''.replace('***RULER***', RULER)
+'''.replace('***RULER***', RULER).replace('***SPACE***', ' '*(((terminal_size-6)//2)-7))
 
 ABOUT_MAIN = '''
  about:
