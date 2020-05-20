@@ -91,7 +91,7 @@ class SHELL_ALL(Cmd):
                 output += i
         output = output[0:-1].split(' ')
         output = style_dir(output).strip()
-        print (textwrap.fill(output,self.get_terminal_size()).strip())
+        print (textwrap.fill(output,self.get_terminal_size())[0:-2])
 
     def do_cd(self,arg):
         try:
