@@ -8,18 +8,6 @@ Color.Theme('light')
 # DESIGN and CODE - ALL TOOL...
 PROMPT = lambda text,pwd:Color.reader(f'G#┌───B#[ C#{pwd}B# ]G##B#[ Y#{os.uname().nodename} B#]G##B#[ R#{text} B#]G#>>>\nG#|\nG#└─>>>W#$ \033[0;37m')
 
-def style_dir(list):
-    max = 0
-    output = ''
-    for i in list:
-        r_i = Color().remove_c(i)
-        if len(r_i) > max:
-            max = len(r_i)
-    for i in list:
-        r_i = Color().remove_c(i)
-        output += f'{i}{" "*(max-len(r_i))}  '
-    return output
-
 class SHELL_ALL(Cmd):
     page = 'main'
     shell_main = None
@@ -35,19 +23,20 @@ class SHELL_ALL(Cmd):
         return shutil.get_terminal_size().columns
 
     def SQUARE(self,HELP,type=True): # Tool DESIGN
-        os.system('clear')
         S = 'G#[Y#+G#]'
         if type:
             return Style(HELP).Square(
             Square=[S,' G#│ ',S,'─',S,' G#│',S,'─'])
         else:
+            os.system('clear')
             Animation.SlowLine(HELP,t=0.01)
 
     def cmdloop(self,*arg,**kwargs):
         try:
             super().cmdloop(*arg,**kwargs)
-        except KeyboardInterrupt:# if user click (ctrl + c)
-            exit('\n\033[0m')
+        except KeyboardInterrupt: # if user click (ctrl + c)
+            print('\033[0m')
+            exit()
 
     def default(self, line):
         '''
@@ -84,23 +73,23 @@ class SHELL_ALL(Cmd):
         output = ''
         for i in files:
             if os.path.isfile(os.path.join(path,i)):
-                output += '\033[0;37m'+i+' '
+                if i.endswith('.png') or i.endswith('.jpg'):
+                    output += '\033[1;95m'+i+' '
+                else:
+                    output += '\033[0;37m'+i+' '
             elif os.path.isdir(os.path.join(path,i)):
                 output += '\033[1;34m'+i+' '
             else:
                 output += i
-        output = output[0:-1].split(' ')
-        output = style_dir(output).strip()
-        print (textwrap.fill(output,self.get_terminal_size())[0:-2])
+        output = output[0:-8].split(' ')
+        self.columnize(output,displaywidth=self.get_terminal_size())
 
     def do_cd(self,arg):
         try:
             if arg in ['~','$HOME','']:
                 os.chdir(os.environ['HOME'])
-                self.do_ls('')
             else:
                 os.chdir(os.path.join(os.getcwd(),arg))
-                self.do_ls('')
             self.prompt = PROMPT(self.page,os.getcwd().split("/")[-1])
         except FileNotFoundError:
             print (Errors['FileNotFoundError'].format(arg))
@@ -177,6 +166,9 @@ class SHELL_ALL(Cmd):
         return self.completeFiles(args[0])
 
     def complete_run(self,*args):
+        return self.completeFiles(args[0])
+
+    def complete_bash(self,*args):
         return self.completeFiles(args[0])
 
 class EasyCmd:

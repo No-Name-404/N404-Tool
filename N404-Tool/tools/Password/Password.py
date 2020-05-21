@@ -12,6 +12,8 @@ SHELL_ALL)
 class Password_shell(SHELL_ALL):
     # the shell command...
     page = 'Password'
+    file = 'N4list.txt'
+    list = None
 
     def __init__(self):
         super().__init__()

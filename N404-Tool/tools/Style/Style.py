@@ -125,7 +125,7 @@ class Style_shell(SHELL_ALL):
     title = 'text'
     padding_x = 5
     padding_y = 1
-    file = 'N404Style.py'
+    file = 'N4Style.py'
 
     # save the design...
     save = None
@@ -145,8 +145,7 @@ class Style_shell(SHELL_ALL):
             path=self.path,
             file=self.file,
             )
-
-        self.SQUARE(self.SQUARE(op),type=False)
+        print(self.SQUARE(op))
 
     def do_set(self,arg):
         args = arg

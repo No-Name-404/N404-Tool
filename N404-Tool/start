@@ -27,6 +27,7 @@ else:
 # this is the appropriate solution.
 temp = '''
     def do_{name}(self,arg):
+        os.system('clear')
         {name}_shell.shell_main = super(shell, self).cmdloop
         {name}_shell().cmdloop({name}_shell().help())
     '''
@@ -97,4 +98,5 @@ if __name__=='__main__': # Check if run as main
         else:
             print (HELP_TOOL)
     else:
+        os.system('clear')
         shell().cmdloop() # start the N404-Tool

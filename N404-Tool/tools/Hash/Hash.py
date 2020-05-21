@@ -158,7 +158,7 @@ class Hash_shell(SHELL_ALL):
         )
 
         op = self.SQUARE(op)
-        self.SQUARE(op,type=False)
+        self.SQUARE(op)
 
     def do_start(self,arg):
         # start hashing...
