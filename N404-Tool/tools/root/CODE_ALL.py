@@ -35,8 +35,8 @@ class SHELL_ALL(Cmd):
         try:
             super().cmdloop(*arg,**kwargs)
         except KeyboardInterrupt: # if user click (ctrl + c)
-            print('\033[0m')
             exit()
+            print('\n\033[0m')
 
     def default(self, line):
         '''

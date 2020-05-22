@@ -4,9 +4,8 @@ from N4Tools.Design import (
 from tools.root import (
 HELP_TELEBOT as HELP,
 OPTIONS_TELEBOT as OPTIONS,
-SHELL_ALL,
-TOOLS_PATH,
-XPATH )
+SHELL_ALL,TOOLS_PATH,
+XPATH,Errors )
 
 import telebot ,json ,os
 
@@ -116,7 +115,7 @@ class Telebot_shell(SHELL_ALL):
                 self.save()
             else:
                 NoError = False
-                print(f'path: {set}: not exist')
+                print(Errors['NoteExist'].format(set))
         else:
             NoError = False
             print(Color.reader(f'Error: {name}: command not found'))

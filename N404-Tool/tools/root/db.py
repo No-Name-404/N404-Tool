@@ -10,6 +10,8 @@ Errors={
 'FileNotFoundError':'bash: cd: {}: No such file or directory',
 'NotADirectoryError':'bash: cd: {}: Not a directory',
 'IsADirectoryError':'cat: {}: Is a directory',
+'IsAlreadyExist':'Error: {}: is already exist',
+'NotExist':'Error: {}: not exist',
 }
 
 # TOOL ...
@@ -53,7 +55,7 @@ HELP_MAIN ='''
   Style     Create your own style.
   Hash      New and complex encryption.
   Telebot   Create your own telegram bot.
-  password  To create list of passwords.
+  Password  To create list of passwords.
 ***RULER***
 
  system:
@@ -193,7 +195,7 @@ HELP_PASSWORD ='''
 OPTIONS_PASSWORD = '''
  options:
 ***RULER***
-  type : {type} R## text or numder
+  file : {file}
   list : {list}
 ***RULER***
 '''.replace('***RULER***', RULER)
