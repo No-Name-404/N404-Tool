@@ -134,7 +134,7 @@ class Password_shell(SHELL_ALL):
             name = None
             print('Error: value not found')
         if name == 'list':
-            if LIST(list=set)._check() and set not == '':
+            if LIST(list=set)._check() and set != '':
                 self.list = set
             else:
                 NoError = False
