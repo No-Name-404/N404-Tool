@@ -7,8 +7,6 @@ OPTIONS_PASSWORD as OPTIONS,
 SHELL_ALL,Errors)
 
 import os
-# >>> x = ('3*'*3)[0:-1]
-# >>> exec(f'print({x})')
 
 class LIST:
     def __init__(self,list='1000',file='list.txt'):
@@ -47,23 +45,37 @@ class LIST:
         self.clear_file()
         nums = len(self.list)
         temp = 0
+        counter = 0
+        print (Color.reader(f'G## Loading B#[ W#0 B#% W#100 B#]'),end='\r')
         for i in range(int(self.list)):
             i += 1
             temp += 1
             password = f"{'0'*(nums-len(str(i)))}{i}\n"
             self.write_file(password)
-            print (Color.reader(f'G##Loading B#[ Y#{temp} B#% W#{self.list} B#]'),end='\r')
-        print (Color.reader('\nR#Done...'))
+            if int(self.list)//100 == temp:
+                counter += 1
+                print (Color.reader(f'G## Loading B#[ W#{counter if counter < 100 else 100} B#% W#100 B#]'),end='\r')
+                temp = 0
+            elif int(self.list) < 100:
+                print (Color.reader(f'G## Loading B#[ W#100 Y#% W#100 B#]'),end='\r')
+        print (Color.reader(f'\nG## Was created {self.list} passwords\n# Dane...'))
 
     def str_list(self):
         self.clear_file()
         nums = eval(f'{"{}*".format(len(self.list))*len(self.list)}'[:-1])
         temp = 0
+        counter = 0
+        print (Color.reader(f'G## Loading B#[ W#0 B#% W#100 B#]'),end='\r')
         for password in self.mix():
             temp += 1
             self.write_file(password+'\n')
-            print (Color.reader(f'G##Loading B#[ Y#{temp} B#% W#{nums} B#]'),end='\r')
-        print (Color.reader('\nR#Done...'))
+            if nums//100 == temp:
+                counter += 1
+                print (Color.reader(f'G## Loading B#[ W#{counter if counter < 100 else 100} B#% W#100 B#]'),end='\r')
+                temp = 0
+            elif nums < 100:
+                print (Color.reader(f'G## Loading B#[ W#100 Y#% W#100 B#]'),end='\r')
+        print (Color.reader(f'\nG## Was created {nums} passwords\n# Dane...'))
 
     def mix(self):
         text = [[_ for _ in self.list]]*len(self.list)

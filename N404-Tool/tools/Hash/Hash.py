@@ -93,7 +93,6 @@ class hashing:
             self.msg(source_path)
             basename = source_path[:-3]
             bytecode_path = "%s.pyc" % (basename)
-            # print("compiling %s to %s" % (source_path, bytecode_path))
             py_compile.compile(source_path, bytecode_path, "exec")
             if self.copy == False:
                 os.system('rm '+source_path)

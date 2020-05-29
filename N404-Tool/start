@@ -1,7 +1,7 @@
 #!/usr/bin/python3 -B
 from cmd import Cmd
 from N4Tools.Design import Color,Style,Animation
-import os ,sys ,subprocess
+import os ,sys ,subprocess ,webbrowser
 
 from tools import (
         Tools_shell,Style_shell,
@@ -30,10 +30,22 @@ temp = '''
         os.system('clear')
         {name}_shell.shell_main = super(shell, self).cmdloop
         {name}_shell().cmdloop({name}_shell().help())
+    def help_{name}(*args):
+        if 'com.termux' in os.getcwd():
+            webbrowser.open('{url}')
+        else:
+            print(Color.reader('Y#vedio C#: W#{url}'))
     '''
+_sec = {
+    'Tools':    'https://bit.ly/3eyKC8G',
+    'Style':    'https://bit.ly/3eyKC8G',
+    'Hash':     'https://bit.ly/3eyKC8G',
+    'Telebot':  'https://bit.ly/3eyKC8G',
+    'Password': 'https://bit.ly/3eyKC8G',
+    }
 sections = 'class Sections:'
-for i in ['Tools','Style','Hash','Telebot','Password']:
-    sections += temp.format(name=i)
+for name,url in _sec.items():
+    sections += temp.format(name=name,url=url)
 exec(sections)
 # end...
 

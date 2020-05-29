@@ -6,7 +6,7 @@ Color.Theme('light')
 
 # os.uname().sysname
 # DESIGN and CODE - ALL TOOL...
-PROMPT = lambda text,pwd:Color.reader(f'G#┌───B#[ C#{pwd}B# ]G##B#[ Y#{os.uname().nodename} B#]G##B#[ R#{text} B#]G#>>>\nG#|\nG#└─>>>W#$ \033[0;37m')
+PROMPT = lambda text,pwd:Color.reader(f'G#┌───B#[ C#{pwd}B# ]G##B#[ Y#{os.uname().nodename} B#]G##B#[ R#{text} B#]G#>>>\nG#│\nG#└─>>>W#$ \033[0;37m')
 
 class SHELL_ALL(Cmd):
     page = 'main'
@@ -35,8 +35,8 @@ class SHELL_ALL(Cmd):
         try:
             super().cmdloop(*arg,**kwargs)
         except KeyboardInterrupt: # if user click (ctrl + c)
-            exit()
             print('\n\033[0m')
+            exit()
 
     def default(self, line):
         '''

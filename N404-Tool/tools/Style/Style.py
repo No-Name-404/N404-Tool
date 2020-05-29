@@ -11,6 +11,7 @@ OPTIONS_STYLE as OPTIONS,
 SHELL_ALL )
 
 Color.Theme('light')
+Color.add('\033[0m')
 
 # Colors...
 _set_c = lambda color:Color.reader(color)
@@ -68,7 +69,7 @@ class MakeStyle(ProFunctions):
         This is the final design.
         '''
         _c = self._c
-        Intro = _c[1]+Text(self.intro).Figlet() if self.intro else False
+        Intro = _c[0]+Text(self.intro).Figlet()+'\033[0m' if self.intro else False
 
         title = _set_c(self.title)+'\n'
         tools = [f'{_c[0]}{name} {_c[2]}[{_c[1]}{num+1}{_c[2]}]'
@@ -79,7 +80,7 @@ class MakeStyle(ProFunctions):
         text = Style(tools).Center()
         if Intro:
             text = Style(Intro,tools).Center()
-        return text
+        return text.strip()
 
     def my_square(self,tools,index,text):
         '''
@@ -126,9 +127,17 @@ class Style_shell(SHELL_ALL):
     padding_x = 5
     padding_y = 1
     file = 'N4Style.py'
+    path = os.getcwd()
 
     # save the design...
     save = None
+
+    def __init__(self):
+        super().__init__()
+        my_style = MakeStyle(self.Intro,self.title,
+        self.tools,self.padding_x,self.padding_y)
+        my_style = my_style.StyleText()
+        self.save = my_style
 
     def help(self):
         return self.SQUARE(HELP)
@@ -216,11 +225,13 @@ class Style_shell(SHELL_ALL):
     def do_save(self,arg):
         style = self.save
         path_file = os.path.join(self.path,self.file)
+        note1 = '# from My_Style import Animation as An'
+        note2 = '# To show...\n# print (style())\n# An.SlowLine(style(),t=0.02)'
         with open(path_file,'a') as f:
-            f.write(f'# from My_Style import Animation as An\ndef style():\n\treturn {bytes(style,"utf-8")}.decode(\'utf-8\')\n# To show...\n# print (style())\n# An.SlowLine(style(),t=0.02)')
-            print (Color.reader(f'G#Done: B#{path_file}'))
-
-if __name__ == '__main__': # for the developer.
-    Style_shell().cmdloop()
-    # s = MakeStyle('My Tools','R#title',['tools']*10,0,1)
-    # print(s.StyleText())
+            f.write(f'{note1}\ndef style():\n\treturn {bytes(style,"utf-8")}.decode(\'utf-8\')\n{note2}')
+            Animation.Loading(
+                text='G## Loading ',
+                AT=[f'B#[ W#{i+1} Y#% W#100 B#]' for i in range(100)],
+                repeat=1,
+                t=0.03)
+            print (Color.reader(f'G## Save in W#{path_file}\nG## Done...'))

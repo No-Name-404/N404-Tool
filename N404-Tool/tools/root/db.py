@@ -1,9 +1,24 @@
-import shutil
+import shutil, threading, time
 
-terminal_size = shutil.get_terminal_size().columns
-RULER = '╌'*(terminal_size-6)
-RULER_UOT = '╌'*(terminal_size)
+class refresh:
+    terminal_size = shutil.get_terminal_size().columns
+    RULER = '╌'*(terminal_size-6)
+    RULER_UOT = '╌'*(terminal_size-5)
 
+    def __init__(self):
+        _up = threading.Thread(target=self._update_terminal_size)
+        _up.daemon = True
+        _up.start()
+
+    def _update_terminal_size(self):
+        while True:
+            self.terminal_size = shutil.get_terminal_size().columns
+            self.RULER = '╌'*(self.terminal_size-6)
+            self.RULER_UOT = '╌'*(self.terminal_size-5)
+            time.sleep(0.5)
+
+RULER = '╌'*(refresh.terminal_size-6)
+RULER_UOT = '╌'*(refresh.terminal_size-5)
 
 # Errors...
 Errors={
@@ -75,7 +90,7 @@ HELP_MAIN ='''
   delete     To delete N404-Tool!!.
   about      About the developer.
 ***RULER***
-'''.replace('***RULER***', RULER).replace('***SPACE***', ' '*(((terminal_size-6)//2)-7))
+'''.replace('***RULER***', RULER).replace('***SPACE***', ' '*(((refresh.terminal_size-6)//2)-7))
 
 ABOUT_MAIN = '''
  about:

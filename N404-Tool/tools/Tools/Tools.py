@@ -9,8 +9,7 @@ Color.Theme('light')
 from tools.root import (
 HELP_TOOLS as HELP,
 OPTIONS_TOOLS as OPTIONS,
-SHELL_ALL,
-TOOLS_PATH,
+SHELL_ALL,TOOLS_PATH,
 XPATH )
 
 # all tools clone...
