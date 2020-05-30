@@ -10,7 +10,7 @@ import os
 
 class LIST:
     def __init__(self,list='1000',file='list.txt'):
-        self.list = list
+        self.list = list.strip()
         self.file = file
         self.type = None
         self._check()
@@ -18,6 +18,8 @@ class LIST:
     def run(self):
         if self.type == 'int':
             self.int_list()
+        elif self.type == 'info':
+            self.info_list()
         else :
             self.str_list()
 
@@ -27,11 +29,15 @@ class LIST:
             self.type = 'int'
             return True
         except:
-            if len(self.list) > 9:
-                return False
-            else:
+            if self.list.startswith('<') and self.list.endswith('>'):
+                self.type = 'info'
                 return True
-                self.type = 'str'
+            else:
+                if len(self.list) <= 9 :
+                    self.type = 'str'
+                    return True
+                else:
+                    return False
 
     def clear_file(self):
         with open(self.file,'w') as f:
@@ -77,38 +83,59 @@ class LIST:
                 print (Color.reader(f'G## Loading B#[ W#100 Y#% W#100 B#]'),end='\r')
         print (Color.reader(f'\nG## Was created {nums} passwords\n# Dane...'))
 
-    def mix(self):
-        text = [[_ for _ in self.list]]*len(self.list)
+    def info_list(self):
+        self.clear_file()
+        list = self.list[1:-1].split('-')
+        nums = eval(f'{"{}*".format(len(list))*len(list)}'[:-1])
+        temp = 0
+        counter = 0
+        print (Color.reader(f'G## Loading B#[ W#0 B#% W#100 B#]'),end='\r')
+        for password in self.mix(text=[[_ for _ in list]]*len(list),list=list):
+            temp += 1
+            self.write_file(password+'\n')
+            if nums//100 == temp:
+                counter += 1
+                print (Color.reader(f'G## Loading B#[ W#{counter if counter < 100 else 100} B#% W#100 B#]'),end='\r')
+                temp = 0
+            elif nums < 100:
+                print (Color.reader(f'G## Loading B#[ W#100 Y#% W#100 B#]'),end='\r')
+        print (Color.reader(f'\nG## Was created {nums} passwords\n# Dane...'))
+
+    def mix(self,text=False,list=False):
+        if not text:
+            text = [[_ for _ in self.list]]*len(self.list)
+        if not list:
+            list = self.list
         for a in text[0]:
-            if len(self.list) == 1: #2
+            if len(list) == 1: #2
                 yield a
             else:
                 for b in text[1]:
-                    if len(self.list) == 2: #2
+                    if len(list) == 2: #2
                         yield a+b
                     else:
                         for c in text[2]:
-                            if len(self.list) == 3: #3
+                            if len(list) == 3: #3
                                 yield a+b+c
                             else:
                                 for d in text[3]:
-                                    if len(self.list) == 4: #4
+                                    if len(list) == 4: #4
                                         yield a+b+c+d
                                     else:
                                         for e in text[4]:
-                                            if len(self.list) == 5: #5
+                                            if len(list) == 5: #5
                                                 yield a+b+c+d+e
                                             else:
                                                 for f in text[5]:
-                                                    if len(self.list) == 6: #6
+                                                    if len(list) == 6: #6
                                                         yield a+b+c+d+e+f
                                                     else:
                                                         for g in text[6]:
-                                                            if len(self.list) == 7: #7
+                                                            if len(list) == 7: #7
                                                                 yield a+b+c+d+e+f+g
                                                             else:
                                                                 for h in text[7]:
-                                                                    if len(self.list) == 8: #8
+                                                                    if len(list) == 8: #8
                                                                         yield a+b+c+d+e+f+g+h
                                                                     else:
                                                                         for i in text[8]:
