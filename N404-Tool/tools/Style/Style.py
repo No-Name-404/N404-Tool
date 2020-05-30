@@ -8,7 +8,8 @@ import os ,sys ,json ,time ,random
 from tools.root import (
 HELP_STYLE as HELP,
 OPTIONS_STYLE as OPTIONS,
-SHELL_ALL )
+SHELL_ALL,save_data,
+read_data )
 
 Color.Theme('light')
 Color.add('\033[0m')
@@ -139,6 +140,9 @@ class Style_shell(SHELL_ALL):
         my_style = my_style.StyleText()
         self.save = my_style
 
+        if read_data(['Style']):
+            self.path = read_data(['Style','path'])
+
     def help(self):
         return self.SQUARE(HELP)
 
@@ -193,6 +197,7 @@ class Style_shell(SHELL_ALL):
 
             if 'path' in args and CHECK:
                 self.path = set.strip()
+                save_data({'Style':{'path':self.path}})
             elif 'path' not in args and not CHECK:
                 pass
             else :

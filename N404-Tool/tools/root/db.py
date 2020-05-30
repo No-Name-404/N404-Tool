@@ -1,4 +1,4 @@
-import shutil, threading, time
+import shutil, threading, time, json, os,tools
 
 class refresh:
     terminal_size = shutil.get_terminal_size().columns
@@ -16,6 +16,31 @@ class refresh:
             self.RULER = '╌'*(self.terminal_size-6)
             self.RULER_UOT = '╌'*(self.terminal_size-5)
             time.sleep(0.5)
+_XPATH = os.path.abspath(tools.__file__).replace('N404-Tool/tools/__init__.py', '')
+def read_data(data='all'):
+    try:
+        with open(_XPATH+'.db.json','r') as f:
+            db = f.read()
+        db = json.loads(db)
+        if data == 'all':
+            return db
+        else:
+            try:
+                temp = 'db'
+                for i in data:
+                    temp += f'["{i}"]'
+                return eval(temp)
+            except KeyError:
+                return False
+    except:
+        return False
+
+def save_data(data):
+    db = read_data()
+    for x,y in data.items():
+        db[x] = y
+    with open(_XPATH+'.db.json','w') as f:
+        f.write(json.dumps(db,indent=2))
 
 RULER = '╌'*(refresh.terminal_size-6)
 RULER_UOT = '╌'*(refresh.terminal_size-5)

@@ -10,7 +10,8 @@ from tools.root import (
 HELP_TOOLS as HELP,
 OPTIONS_TOOLS as OPTIONS,
 SHELL_ALL,TOOLS_PATH,
-XPATH )
+XPATH,save_data,read_data,
+Errors )
 
 # all tools clone...
 with open(TOOLS_PATH+'Tools/.clone.json') as file:
@@ -27,6 +28,8 @@ class Tools_shell(SHELL_ALL):
         for key,clone in CLONES.items():
             self.tools_name.append(key)
         self.tools_name.sort()
+        if read_data(['Tools','path']):
+            self.path = read_data(['Tools','path'])
 
     def help(self):
         return  self.SQUARE(HELP)
@@ -39,9 +42,10 @@ class Tools_shell(SHELL_ALL):
         CHECK = os.path.isdir(PATH)
         if 'path' in arg and CHECK:
             self.path = PATH
+            save_data({'Tools':{'path':self.path}})
             print(Color.reader(f'G#Y#path C#: W#{PATH}'))
         else :
-            print(f'path: {PATH}: not exist')
+            print(Errors['NotExist'].format(PATH))
 
     def complete_set(self, text, line, begidx, endidx):
         LIST = ['path']
@@ -87,6 +91,6 @@ class Tools_shell(SHELL_ALL):
             completions = [
                 f
                 for f in self.tools_name
-                if f.startswith(text)
+                if f.startswith(text.title())
             ]
         return completions

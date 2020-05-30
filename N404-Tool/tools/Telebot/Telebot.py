@@ -5,7 +5,8 @@ from tools.root import (
 HELP_TELEBOT as HELP,
 OPTIONS_TELEBOT as OPTIONS,
 SHELL_ALL,TOOLS_PATH,
-XPATH,Errors )
+XPATH,Errors,read_data,
+save_data )
 
 import telebot ,json ,os
 
@@ -17,9 +18,10 @@ class Telebot_shell(SHELL_ALL):
 
     def __init__(self):
         super().__init__()
-        if self.read():
-            self.token = self.read()['token']
-            self.database = self.read()['file']
+        _db = read_data(['Telebot'])
+        if read_data(['Telebot','token']):
+            self.token = _db['token']
+            self.database = _db['file']
 
     def help(self):
         return  self.SQUARE(HELP)
@@ -41,22 +43,7 @@ class Telebot_shell(SHELL_ALL):
         return db
 
     def save(self):
-        with open(XPATH+'.db.json','w') as f:
-            f.write(json.dumps({'token':self.token,'file':self.database}
-            ,indent=2))
-
-    def read(self):
-        try:
-            with open(XPATH+'.db.json','r') as f:
-                db = f.read()
-            db = json.loads(db)
-            try:
-                test = db['token'],db['file']
-                return db
-            except KeyError:
-                return False
-        except:
-            return False
+            save_data({'Telebot':{'token':self.token,'file':self.database}})
 
     def do_start(self,arg):
         if self.token and self.database and os.path.isfile(self.database):
@@ -115,7 +102,7 @@ class Telebot_shell(SHELL_ALL):
                 self.save()
             else:
                 NoError = False
-                print(Errors['NoteExist'].format(set))
+                print(Errors['NotExist'].format(set))
         else:
             NoError = False
             print(Color.reader(f'Error: {name}: command not found'))

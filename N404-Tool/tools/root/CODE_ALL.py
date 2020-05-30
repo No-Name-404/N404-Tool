@@ -1,7 +1,11 @@
 import os, textwrap, shutil, subprocess
-from N4Tools.Design import Color,Style,Animation
 from cmd import Cmd
-from tools.root.db import Errors,RULER_UOT
+
+from N4Tools.Design import Color,Style,Animation
+from tools.root.db import (
+Errors,RULER_UOT,
+save_data,read_data)
+
 Color.Theme('light')
 
 # os.uname().sysname
@@ -43,7 +47,10 @@ class SHELL_ALL(Cmd):
         if user enter a wrong command,
         this message will be display
         '''
-        print('bash: %s: command not found'%line)
+        if read_data(['root','bash']) == 'N4all':
+            os.system(line)
+        else:
+            print('bash: %s: command not found'%line)
 
     def do_clear(self,arg):
         os.system('clear')
@@ -52,7 +59,14 @@ class SHELL_ALL(Cmd):
         exit('\033[0m')
 
     def do_bash(self,arg):
-        os.system(arg)
+        if arg == 'N4all':
+            save_data({'root':{'bash':arg}})
+            print (Color.reader('G## The tool now supports bash \n# Done'))
+        elif arg == 'N4not':
+            save_data({'root':{'bash':arg}})
+            print (Color.reader('G## The tool now not supports bash \n# Done'))
+        else:
+            os.system(arg)
 
     def do_cat(self,arg):
         try:
