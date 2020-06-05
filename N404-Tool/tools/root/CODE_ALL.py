@@ -6,11 +6,12 @@ from tools.root.db import (
 Errors,RULER_UOT,
 save_data,read_data)
 
-Color.Theme('light')
-
 # os.uname().sysname
 # DESIGN and CODE - ALL TOOL...
-PROMPT = lambda text,pwd:Color.reader(f'G#┌───B#[ C#{pwd}B# ]G##B#[ Y#{os.uname().nodename} B#]G##B#[ R#{text} B#]G#>>>\nG#│\nG#└─>>>W#$ \033[0;37m')
+PROMPT = lambda text,pwd:Color.reader(f'\
+GL#┌───BL#[ CL#{pwd}BL# ]GL##BL#[ YL#{os.uname().nodename} BL#]GL##BL#[ RL#{text} BL#]GL#>>>\n\
+GL#│\n\
+GL#└─>>>WL#$ W#')
 
 class SHELL_ALL(Cmd):
     page = 'main'
@@ -27,10 +28,10 @@ class SHELL_ALL(Cmd):
         return shutil.get_terminal_size().columns
 
     def SQUARE(self,HELP,type=True): # Tool DESIGN
-        S = 'G#[Y#+G#]'
+        S = 'GL#[YL#+GL#]'
         if type:
             return Style(HELP).Square(
-            Square=[S,' G#│ ',S,'─',S,' G#│',S,'─'])
+            Square=[S,' GL#│ ',S,'─',S,' GL#│',S,'─'])
         else:
             os.system('clear')
             Animation.SlowLine(HELP,t=0.01)

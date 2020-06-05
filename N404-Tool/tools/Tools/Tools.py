@@ -4,7 +4,6 @@ from N4Tools.Design import (
 
 from N4Tools.System import is_in_bin
 import os ,sys ,json ,time ,subprocess
-Color.Theme('light')
 
 from tools.root import (
 HELP_TOOLS as HELP,

@@ -87,7 +87,7 @@ HELP_TOOL = f'''
 
 # main shell texts...
 HELP_MAIN ='''
-***SPACE***Y#N404-Tool R#vB#{C#1.0B#}
+***SPACE***GL#<<< WL#W@ N404-Tool ## GL#>>>
 
  sections:
 ***RULER***
@@ -115,9 +115,15 @@ HELP_MAIN ='''
   delete     To delete N404-Tool!!.
   about      About the developer.
 ***RULER***
-'''.replace('***RULER***', RULER).replace('***SPACE***', ' '*(((refresh.terminal_size-6)//2)-7))
+'''.replace('***RULER***', RULER).replace('***SPACE***', ' '*(((refresh.terminal_size-6)//2)-9))
 
 ABOUT_MAIN = '''
+ info:
+***RULER***
+  version   1.0
+  N4Tools   1.4
+***RULER***
+
  about:
 ***RULER***
   name      Mohamed Al-kainai.

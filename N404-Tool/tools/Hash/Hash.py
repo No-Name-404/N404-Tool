@@ -2,7 +2,6 @@ from N4Tools.Design import (
     Color,Style,Animation
     )
 import os ,sys ,base64 ,marshal ,py_compile ,time
-Color.Theme('light')
 
 from tools.root import (
 HELP_HASH as HELP,

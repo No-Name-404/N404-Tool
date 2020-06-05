@@ -16,7 +16,6 @@ SHELL_ALL,EasyCmd,
 TOOLS_PATH,XPATH )
 
 from tools.root.db import RULER
-Color.Theme('light')
 
 if 'com.termux' in os.getcwd():
     DEL = 'rm -rif '

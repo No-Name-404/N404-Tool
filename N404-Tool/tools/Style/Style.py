@@ -11,20 +11,17 @@ OPTIONS_STYLE as OPTIONS,
 SHELL_ALL,save_data,
 read_data )
 
-Color.Theme('light')
-Color.add('\033[0m')
-
 # Colors...
 _set_c = lambda color:Color.reader(color)
 R,G,Y,B,P,C,W,Bl = [
-        _set_c('R#'),
-        _set_c('G#'),
-        _set_c('Y#'),
-        _set_c('B#'),
-        _set_c('P#'),
-        _set_c('C#'),
-        _set_c('W#'),
-        _set_c('Bl#'),
+        _set_c('RL#'),
+        _set_c('GL#'),
+        _set_c('YL#'),
+        _set_c('BL#'),
+        _set_c('PL#'),
+        _set_c('CL#'),
+        _set_c('WL#'),
+        _set_c('g#'),
 ]
 
 class MakeStyle(ProFunctions):
@@ -116,7 +113,7 @@ class MakeStyle(ProFunctions):
                 temp = True
         return (S).replace(
         Color.reader(f' {_c[1]}╟         {_c[1]}╢'),
-        Color.reader(f' {_c[1]}╟--[{_c[0]}###{_c[1]}]--╢'))
+        Color.reader(f' {_c[1]}╟--[{_c[0]}§§§{_c[1]}]--╢'))
 
 class Style_shell(SHELL_ALL):
     page = 'Style'

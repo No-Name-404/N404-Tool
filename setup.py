@@ -31,7 +31,7 @@ class setup:
         'python3':python,
     }
     libs = {
-        'N4Tools':root+p3+'pip install N4Tools',
+        'N4Tools':root+p3+'pip install N4Tools==1.4',
         'requests':root+p3+'pip install requests',
         'six':root+p3+'pip install six',
         'chardet':root+p3+'pip install chardet',
