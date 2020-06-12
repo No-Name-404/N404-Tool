@@ -31,7 +31,7 @@ temp = '''
         {name}_shell().cmdloop({name}_shell().help())
     def help_{name}(*args):
         if 'com.termux' in os.getcwd():
-            webbrowser.open(f'{url}')
+            os.system(f'termux-open {url}')
         else:
             print(Color.reader('Y#vedio C#: W#{url}'))
     '''
