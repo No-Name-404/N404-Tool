@@ -61,10 +61,10 @@ class SHELL_ALL(Cmd):
 
     def do_bash(self,arg):
         if arg == 'N4all':
-            save_data({'root':{'bash':arg}})
+            save_data({'root':{'bash':'N4all'}})
             print (Color.reader('G## The tool now supports bash \n# Done'))
         elif arg == 'N4not':
-            save_data({'root':{'bash':arg}})
+            save_data({'root':{'bash':'N4not'}})
             print (Color.reader('G## The tool now not supports bash \n# Done'))
         else:
             os.system(arg)

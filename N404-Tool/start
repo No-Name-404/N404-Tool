@@ -1,7 +1,7 @@
 #!/usr/bin/python3 -B
 from cmd import Cmd
 from N4Tools.Design import Color,Style,Animation
-import os ,sys ,subprocess ,webbrowser
+import os ,sys ,subprocess
 
 from tools import (
         Tools_shell,Style_shell,
@@ -70,12 +70,12 @@ class shell(SHELL_ALL,Sections):
 
     def do_delete(self,arg):
         # delete the tool from the system...
-        user = input(Color.reader('R#Do you really want to delete the tool?\n  [G#yR#/n] :\033[0;37m '))
+        user = input(Color.reader('R#Do you really want to delete the tool?\nW#>>> [ yWL# / W#n ] : '))
         if user.lower().strip() == 'y':
             subprocess.run(DEL+os.environ['SHELL'].replace('bash', 'N404-Tool'),shell=True)
             subprocess.run(DEL+os.environ['SHELL'].replace('bin/bash', 'lib/N404-Tool'),shell=True)
             subprocess.run(DEL+(os.getcwd() if os.getcwd().endswith('-Tool') else os.getcwd()+'/N404-Tool' ),shell=True)
-            user = input(Color.reader('R#Do you want to delete the database?\n  [G#yR#/n] :\033[0;37m '))
+            user = input(Color.reader('\nR#Do you want to delete the database?\nW#>>> [ yWL# / W#n ] : '))
             if user.lower().strip() == 'y':
                 subprocess.run(DEL+os.environ['SHELL'].replace('bin/bash', 'lib/db.json'),shell=True)
             exit()

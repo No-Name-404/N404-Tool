@@ -33,7 +33,7 @@ def read_data(data='all'):
             except KeyError:
                 return False
     except:
-        return False
+        return {}
 
 def save_data(data):
     db = read_data()
