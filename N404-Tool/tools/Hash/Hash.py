@@ -204,16 +204,14 @@ class Hash_shell(SHELL_ALL):
                 self.copy = 'False'
             else:
                 NoError = False
-                Color.Theme('dark')
                 print(Color.reader(f'Error: {name}: set [ G#True W#or R#FalseW# ]'))
-                Color.Theme('light')
         else:
             NoError = False
             print(Color.reader(f'Error: {name}: command not found'))
         print (Color.reader(f'Y#{arg[0]} C#: W#{set}\n') if NoError else '',end='')
 
     def complete_set(self,*args):
-        OP = ['type','path']
+        OP = ['type','path','copy']
         OP_H = ['pyc','md5','malker','marshal']
         if not args[0]:
             return OP[:]
